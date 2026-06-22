@@ -12,6 +12,13 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+Para desenvolver (com `pytest`), instale as dependências de desenvolvimento
+em vez disso:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
 ## Como rodar
 
 ```bash
@@ -20,11 +27,36 @@ python app.py
 
 A aplicação fica disponível em `http://localhost:5000`.
 
+### Variáveis de ambiente
+
+| Variável      | Padrão      | Descrição                                  |
+|---------------|-------------|---------------------------------------------|
+| `FLASK_DEBUG` | `false`     | `true` ativa o modo debug do Flask (recarga automática e depurador interativo — nunca use em produção) |
+| `HOST`        | `127.0.0.1` | endereço em que o servidor escuta           |
+| `PORT`        | `5000`      | porta em que o servidor escuta              |
+
+### Rodando em produção
+
+O servidor embutido do Flask (`python app.py`) é só para desenvolvimento.
+Em produção, sirva a aplicação com um servidor WSGI como o
+[Gunicorn](https://gunicorn.org/):
+
+```bash
+pip install gunicorn
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
+```
+
+O endpoint `GET /health` devolve `{"status": "ok"}` e pode ser usado como
+healthcheck por um orquestrador (Docker, Kubernetes, etc.).
+
 ## Como rodar os testes
 
 ```bash
 pytest
 ```
+
+O workflow em `.github/workflows/testes.yml` roda essa mesma suíte
+automaticamente em cada push e pull request para `main`.
 
 ## Estrutura de pastas
 

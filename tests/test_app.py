@@ -15,6 +15,24 @@ def test_pagina_inicial_renderiza_formulario(cliente):
     assert b"form-recomendacao" in resposta.data
 
 
+def test_health_retorna_ok(cliente):
+    resposta = cliente.get("/health")
+    assert resposta.status_code == 200
+    assert resposta.get_json() == {"status": "ok"}
+
+
+def test_rota_inexistente_da_api_retorna_404_json(cliente):
+    resposta = cliente.get("/api/rota-que-nao-existe")
+    assert resposta.status_code == 404
+    assert "erro" in resposta.get_json()
+
+
+def test_recomendar_sem_corpo_json_retorna_400(cliente):
+    resposta = cliente.post("/api/recomendar")
+    assert resposta.status_code == 400
+    assert "erro" in resposta.get_json()
+
+
 def test_recomendar_caso_valido(cliente):
     resposta = cliente.post(
         "/api/recomendar",

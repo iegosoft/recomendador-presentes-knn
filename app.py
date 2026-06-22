@@ -1,6 +1,12 @@
+import logging
+import os
+
 from flask import Flask, jsonify, render_template, request
 
 from recommender import OCASIAO_SEM_PREFERENCIA, OCASIOES_VOCABULARIO, TAGS_VOCABULARIO, GiftRecommender
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 recomendador = GiftRecommender()
@@ -19,12 +25,18 @@ def index():
     )
 
 
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"})
+
+
 @app.route("/api/recomendar", methods=["POST"])
 def recomendar():
     dados = request.get_json(silent=True) or {}
 
     erro = _validar_dados(dados)
     if erro:
+        logger.info("requisicao invalida em /api/recomendar: %s", erro)
         return jsonify({"erro": erro}), 400
 
     resultados, orcamento_ampliado = recomendador.recomendar(
@@ -64,5 +76,23 @@ def _validar_dados(dados):
     return None
 
 
+@app.errorhandler(404)
+def nao_encontrado(_erro):
+    if request.path.startswith("/api/"):
+        return jsonify({"erro": "rota não encontrada"}), 404
+    return "Página não encontrada.", 404
+
+
+@app.errorhandler(500)
+def erro_interno(erro):
+    logger.exception("erro interno nao tratado", exc_info=erro)
+    if request.path.startswith("/api/"):
+        return jsonify({"erro": "erro interno no servidor"}), 500
+    return "Erro interno no servidor.", 500
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    host = os.environ.get("HOST", "127.0.0.1")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=debug, host=host, port=port)
