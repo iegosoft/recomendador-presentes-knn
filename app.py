@@ -34,7 +34,7 @@ def recomendar():
 
     resposta = {"resultados": resultados}
     if resultados and orcamento_ampliado:
-        resposta["aviso"] = "Ampliamos a busca para encontrar presentes dentro do seu orcamento."
+        resposta["aviso"] = "Ampliamos a busca para encontrar presentes dentro do seu orçamento."
 
     return jsonify(resposta)
 
@@ -45,9 +45,9 @@ def _validar_dados(dados):
     interesses = dados.get("interesses")
 
     if not isinstance(idade, (int, float)) or isinstance(idade, bool) or idade <= 0:
-        return "idade deve ser um numero maior que zero"
+        return "idade deve ser um número maior que zero"
     if not isinstance(orcamento, (int, float)) or isinstance(orcamento, bool) or orcamento <= 0:
-        return "orcamento deve ser um numero maior que zero"
+        return "orçamento deve ser um número maior que zero"
     if not isinstance(interesses, list) or len(interesses) == 0:
         return "selecione ao menos um interesse"
     return None
