@@ -21,10 +21,6 @@ TOLERANCIAS_ORCAMENTO = [0.0, 0.15, 0.30]
 # abaixo desse numero de itens, tenta a proxima tolerancia de orcamento
 MIN_ITENS_PARA_PARAR = 3
 
-# interesses pesam mais que a ocasiao: e o sinal mais forte de que tipo de presente combina
-PESO_TAGS = 1.0
-PESO_OCASIAO = 0.5
-
 # tamanho do pool avaliado pelo KNN antes do corte por diversidade, em multiplos de top_n
 MULTIPLICADOR_POOL = 6
 
@@ -34,17 +30,19 @@ MAX_ITENS_POR_CATEGORIA = 2
 # nenhuma recomendacao e exibida com menos do que isso de compatibilidade
 MIN_COMPATIBILIDADE = 70.0
 
+# bonus de compatibilidade quando o item tambem serve pra ocasiao escolhida -
+# a ocasiao e so contexto adicional, por isso conta como bonus e nao como
+# parte do calculo principal (que e sobre os interesses)
+BONUS_OCASIAO = 5.0
+
 
 class GiftRecommender:
     def __init__(self, caminho_csv="data/presentes.csv"):
         self.df = pd.read_csv(caminho_csv)
         self.df["tags_lista"] = self.df["tags"].apply(self._dividir_multivalorado)
         self.df["ocasioes_lista"] = self.df["ocasiao"].apply(self._dividir_multivalorado)
-        self._matriz_itens = np.array(
-            [
-                self._vetorizar(tags, ocasioes)
-                for tags, ocasioes in zip(self.df["tags_lista"], self.df["ocasioes_lista"])
-            ],
+        self._matriz_tags = np.array(
+            [self._vetorizar_tags(tags) for tags in self.df["tags_lista"]],
             dtype=float,
         )
 
@@ -54,13 +52,9 @@ class GiftRecommender:
             return []
         return [parte.strip() for parte in str(valor).split(";") if parte.strip()]
 
-    def _vetorizar(self, tags, ocasioes):
-        vetor_tags = [PESO_TAGS if tag in tags else 0.0 for tag in TAGS_VOCABULARIO]
-        if OCASIAO_SEM_PREFERENCIA in ocasioes:
-            vetor_ocasioes = [0.0] * len(OCASIOES_VOCABULARIO)
-        else:
-            vetor_ocasioes = [PESO_OCASIAO if oc in ocasioes else 0.0 for oc in OCASIOES_VOCABULARIO]
-        return vetor_tags + vetor_ocasioes
+    @staticmethod
+    def _vetorizar_tags(tags):
+        return [1.0 if tag in tags else 0.0 for tag in TAGS_VOCABULARIO]
 
     def _filtrar_por_idade_e_genero(self, idade, genero):
         mascara_idade = (self.df["idade_min"] <= idade) & (self.df["idade_max"] >= idade)
@@ -83,10 +77,9 @@ class GiftRecommender:
         if elegiveis.empty:
             return [], False
 
-        ocasioes_perfil = [ocasiao] if ocasiao else []
-        perfil = np.array(self._vetorizar(interesses, ocasioes_perfil), dtype=float)
+        perfil_tags = np.array(self._vetorizar_tags(interesses), dtype=float)
 
-        if not perfil.any():
+        if not perfil_tags.any():
             candidatos, tolerancia_usada = self._filtrar_por_orcamento(elegiveis, orcamento)
             if candidatos.empty:
                 return [], False
@@ -98,7 +91,7 @@ class GiftRecommender:
         # item qualquer dentro do preco", que e o que fazia o sistema parar de
         # ampliar a busca cedo demais e devolver presentes sem relacao com os
         # interesses so porque cabiam no orcamento original.
-        norma_perfil_ao_quadrado = float(np.dot(perfil, perfil))
+        norma_perfil_ao_quadrado = float(np.dot(perfil_tags, perfil_tags))
         pool = []
         tolerancia_usada = 0.0
         for tolerancia in TOLERANCIAS_ORCAMENTO:
@@ -107,7 +100,7 @@ class GiftRecommender:
             candidatos = elegiveis[elegiveis["preco"] <= limite]
             if candidatos.empty:
                 continue
-            pool = self._pool_compativel(candidatos, perfil, norma_perfil_ao_quadrado, orcamento, top_n)
+            pool = self._pool_compativel(candidatos, perfil_tags, norma_perfil_ao_quadrado, ocasiao, orcamento, top_n)
             if pool:
                 break
 
@@ -118,25 +111,40 @@ class GiftRecommender:
         resultados = self._selecionar_com_diversidade(pool, top_n)
         return resultados, tolerancia_usada > 0
 
-    def _pool_compativel(self, candidatos, perfil, norma_perfil_ao_quadrado, orcamento, top_n):
+    def _pool_compativel(self, candidatos, perfil_tags, norma_perfil_ao_quadrado, ocasiao, orcamento, top_n):
         indices = candidatos.index.to_numpy()
-        matriz_candidatos = self._matriz_itens[indices]
+        matriz_candidatos = self._matriz_tags[indices]
 
-        # NearestNeighbors com cosseno faz a busca inicial dos mais parecidos;
-        # o cosseno simetrico penaliza um item por ter caracteristicas extras
-        # que o usuario nem pediu, o que deixava a % de compatibilidade baixa
-        # mesmo quando o item cobria tudo o que foi escolhido. Por isso a
-        # compatibilidade exibida e recalculada como cobertura do perfil: que
-        # fracao (ponderada) do que o usuario pediu esse item realmente tem.
+        # NearestNeighbors com cosseno faz a busca inicial dos mais parecidos.
+        # A compatibilidade exibida, porem, e a cobertura do perfil: que
+        # fracao das tags escolhidas pelo usuario esse item realmente tem
+        # (overlap / norma_perfil). Isso responde a pergunta que importa pro
+        # usuario - "o presente tem o que eu pedi?" - sem penalizar um item
+        # por ter caracteristicas extras que ele nem pediu. Um item que cobre
+        # todas as tags escolhidas marca 100%, mesmo que tambem sirva pra
+        # outras coisas.
+        #
+        # A ocasiao fica de fora desse calculo principal (que e so sobre
+        # interesses) e entra como um bonus simples: a maioria dos itens do
+        # catalogo serve para varias ocasioes ao mesmo tempo, e isso nao deve
+        # ser tratado como "tag extra irrelevante" que penaliza o item.
         tamanho_pool = min(len(candidatos), top_n * MULTIPLICADOR_POOL)
         modelo = NearestNeighbors(metric="cosine", n_neighbors=tamanho_pool)
         modelo.fit(matriz_candidatos)
-        _, posicoes = modelo.kneighbors([perfil])
+        _, posicoes = modelo.kneighbors([perfil_tags])
+
+        ocasioes_lista = candidatos["ocasioes_lista"].to_numpy()
+        usa_ocasiao = bool(ocasiao) and ocasiao != OCASIAO_SEM_PREFERENCIA
 
         pool = []
         for posicao in posicoes[0]:
-            cobertura = float(np.dot(matriz_candidatos[posicao], perfil)) / norma_perfil_ao_quadrado
-            compatibilidade = round(min(cobertura, 1.0) * 100, 1)
+            vetor_item = matriz_candidatos[posicao]
+            sobreposicao = float(np.dot(vetor_item, perfil_tags))
+            cobertura = sobreposicao / norma_perfil_ao_quadrado
+
+            bonus = BONUS_OCASIAO if usa_ocasiao and ocasiao in ocasioes_lista[posicao] else 0.0
+            compatibilidade = round(min(cobertura * 100 + bonus, 100.0), 1)
+
             if compatibilidade >= MIN_COMPATIBILIDADE:
                 pool.append(self._formatar_item(candidatos.iloc[posicao], compatibilidade))
 
