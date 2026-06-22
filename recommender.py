@@ -21,6 +21,16 @@ TOLERANCIAS_ORCAMENTO = [0.0, 0.15, 0.30]
 # abaixo desse numero de itens, tenta a proxima tolerancia de orcamento
 MIN_ITENS_PARA_PARAR = 3
 
+# interesses pesam mais que a ocasiao: e o sinal mais forte de que tipo de presente combina
+PESO_TAGS = 1.0
+PESO_OCASIAO = 0.5
+
+# tamanho do pool avaliado pelo KNN antes do corte por diversidade, em multiplos de top_n
+MULTIPLICADOR_POOL = 4
+
+# limite de itens da mesma categoria entre os resultados finais
+MAX_ITENS_POR_CATEGORIA = 2
+
 
 class GiftRecommender:
     def __init__(self, caminho_csv="data/presentes.csv"):
@@ -42,11 +52,11 @@ class GiftRecommender:
         return [parte.strip() for parte in str(valor).split(";") if parte.strip()]
 
     def _vetorizar(self, tags, ocasioes):
-        vetor_tags = [1.0 if tag in tags else 0.0 for tag in TAGS_VOCABULARIO]
+        vetor_tags = [PESO_TAGS if tag in tags else 0.0 for tag in TAGS_VOCABULARIO]
         if OCASIAO_SEM_PREFERENCIA in ocasioes:
             vetor_ocasioes = [0.0] * len(OCASIOES_VOCABULARIO)
         else:
-            vetor_ocasioes = [1.0 if oc in ocasioes else 0.0 for oc in OCASIOES_VOCABULARIO]
+            vetor_ocasioes = [PESO_OCASIAO if oc in ocasioes else 0.0 for oc in OCASIOES_VOCABULARIO]
         return vetor_tags + vetor_ocasioes
 
     def _filtrar_por_idade_e_genero(self, idade, genero):
@@ -82,18 +92,45 @@ class GiftRecommender:
         indices = candidatos.index.to_numpy()
         matriz_candidatos = self._matriz_itens[indices]
 
-        n_vizinhos = min(top_n, len(candidatos))
-        modelo = NearestNeighbors(metric="cosine", n_neighbors=n_vizinhos)
+        tamanho_pool = min(len(candidatos), top_n * MULTIPLICADOR_POOL)
+        modelo = NearestNeighbors(metric="cosine", n_neighbors=tamanho_pool)
         modelo.fit(matriz_candidatos)
         distancias, posicoes = modelo.kneighbors([perfil])
 
-        resultados = [
+        pool = [
             self._formatar_item(
                 candidatos.iloc[posicao], round((1 - float(distancia)) * 100, 1)
             )
             for distancia, posicao in zip(distancias[0], posicoes[0])
         ]
+        pool.sort(key=lambda item: (-item["compatibilidade"], abs(item["preco"] - orcamento)))
+
+        resultados = self._selecionar_com_diversidade(pool, top_n)
         return resultados, tolerancia_usada > 0
+
+    @staticmethod
+    def _selecionar_com_diversidade(pool_ordenado, top_n):
+        selecionados = []
+        contagem_por_categoria = {}
+
+        for item in pool_ordenado:
+            if len(selecionados) >= top_n:
+                break
+            usados = contagem_por_categoria.get(item["categoria"], 0)
+            if usados < MAX_ITENS_POR_CATEGORIA:
+                selecionados.append(item)
+                contagem_por_categoria[item["categoria"]] = usados + 1
+
+        if len(selecionados) < top_n:
+            ids_selecionados = {item["id"] for item in selecionados}
+            for item in pool_ordenado:
+                if len(selecionados) >= top_n:
+                    break
+                if item["id"] not in ids_selecionados:
+                    selecionados.append(item)
+
+        selecionados.sort(key=lambda item: -item["compatibilidade"])
+        return selecionados
 
     def _recomendar_por_orcamento(self, candidatos, orcamento, top_n):
         candidatos = candidatos.copy()
