@@ -26,7 +26,7 @@ PESO_TAGS = 1.0
 PESO_OCASIAO = 0.5
 
 # tamanho do pool avaliado pelo KNN antes do corte por diversidade, em multiplos de top_n
-MULTIPLICADOR_POOL = 4
+MULTIPLICADOR_POOL = 6
 
 # limite de itens da mesma categoria entre os resultados finais
 MAX_ITENS_POR_CATEGORIA = 2
@@ -104,30 +104,42 @@ class GiftRecommender:
             for distancia, posicao in zip(distancias[0], posicoes[0])
         ]
         pool.sort(key=lambda item: (-item["compatibilidade"], abs(item["preco"] - orcamento)))
+        pool = self._remover_variantes_duplicadas(pool)
 
         resultados = self._selecionar_com_diversidade(pool, top_n)
         return resultados, tolerancia_usada > 0
 
     @staticmethod
-    def _selecionar_com_diversidade(pool_ordenado, top_n):
-        selecionados = []
-        contagem_por_categoria = {}
-
+    def _remover_variantes_duplicadas(pool_ordenado):
+        # itens com a mesma categoria e exatamente as mesmas tags sao a mesma
+        # ideia de presente (ex: variantes de preco do mesmo produto) e empatam
+        # em compatibilidade; manter so o mais proximo do orcamento entre eles
+        # evita que eles sozinhos tomem todas as vagas do pool de diversidade.
+        vistos = set()
+        unicos = []
         for item in pool_ordenado:
-            if len(selecionados) >= top_n:
-                break
-            usados = contagem_por_categoria.get(item["categoria"], 0)
-            if usados < MAX_ITENS_POR_CATEGORIA:
-                selecionados.append(item)
-                contagem_por_categoria[item["categoria"]] = usados + 1
+            chave = (item["categoria"], tuple(sorted(item["tags"])))
+            if chave not in vistos:
+                vistos.add(chave)
+                unicos.append(item)
+        return unicos
 
-        if len(selecionados) < top_n:
-            ids_selecionados = {item["id"] for item in selecionados}
+    @staticmethod
+    def _selecionar_com_diversidade(pool_ordenado, top_n):
+        limite = MAX_ITENS_POR_CATEGORIA
+        selecionados = []
+
+        while len(selecionados) < top_n and limite <= len(pool_ordenado):
+            selecionados = []
+            contagem_por_categoria = {}
             for item in pool_ordenado:
                 if len(selecionados) >= top_n:
                     break
-                if item["id"] not in ids_selecionados:
+                usados = contagem_por_categoria.get(item["categoria"], 0)
+                if usados < limite:
                     selecionados.append(item)
+                    contagem_por_categoria[item["categoria"]] = usados + 1
+            limite += 1
 
         selecionados.sort(key=lambda item: -item["compatibilidade"])
         return selecionados

@@ -52,19 +52,41 @@ def test_fallback_quando_perfil_fica_zerado(recomendador):
     assert all(item["compatibilidade"] is None for item in resultados)
 
 
-def test_diversidade_limita_itens_por_categoria(recomendador):
+def test_diversidade_espalha_resultados_entre_categorias(recomendador):
+    # "decoracao" aparece em itens de varias categorias (Casa & Decoracao,
+    # Pets, Culinaria, Musica, Arte & Artesanato, Jogos...). Sem diversidade,
+    # uma lista de 8 itens tenderia a ficar dominada so por Casa & Decoracao,
+    # que tem o maior numero de produtos com essa tag no catalogo.
     resultados, _ = recomendador.recomendar(
         idade=28,
         genero="Unissex",
         orcamento=1000,
-        ocasiao="Aniversário",
-        interesses=["leitura", "musica", "arte", "decoracao", "tecnologia"],
+        ocasiao=OCASIAO_SEM_PREFERENCIA,
+        interesses=["decoracao"],
         top_n=8,
     )
     contagem_por_categoria = {}
     for item in resultados:
         contagem_por_categoria[item["categoria"]] = contagem_por_categoria.get(item["categoria"], 0) + 1
-    assert all(quantidade <= 2 for quantidade in contagem_por_categoria.values())
+
+    assert len(contagem_por_categoria) >= 4
+    assert max(contagem_por_categoria.values()) <= 3
+
+
+def test_remove_variantes_de_preco_do_mesmo_produto_do_pool(recomendador):
+    # cada produto-base do catalogo tem 7 variantes de preco com as mesmas
+    # tags (Linha Essencial, Edicao Padrao, Versao Pro etc.) que empatam
+    # exatamente na compatibilidade; nao deveriam dominar os resultados.
+    resultados, _ = recomendador.recomendar(
+        idade=28,
+        genero="Unissex",
+        orcamento=2000,
+        ocasiao="Natal",
+        interesses=["tecnologia"],
+        top_n=6,
+    )
+    nomes_base = [item["nome"].split(" – ")[0] for item in resultados]
+    assert len(nomes_base) == len(set(nomes_base))
 
 
 def test_tipos_dos_resultados_sao_nativos(recomendador):
