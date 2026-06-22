@@ -1,73 +1,505 @@
 id,nome,categoria,preco,idade_min,idade_max,genero,ocasiao,tags
-1,Fone de ouvido bluetooth,Tecnologia,150,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
-2,Smartwatch fitness,Tecnologia,650,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
-3,Caixa de som portátil,Tecnologia,220,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
-4,Câmera instantânea,Tecnologia,350,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
-5,Drone com câmera,Tecnologia,900,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
-6,Console portátil de videogame,Tecnologia,1300,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
-7,Box coleção ficção científica,Livros,180,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
-8,Livro de poesia contemporânea,Livros,60,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
-9,Romance best-seller,Livros,55,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
-10,Livro de receitas gourmet,Livros,90,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
-11,Biografia inspiradora,Livros,70,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
-12,Guia de viagem ilustrado,Livros,85,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
-13,Carteira de couro,Moda,180,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
-14,Bolsa transversal,Moda,220,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
-15,Óculos de sol clássico,Moda,150,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
-16,Cachecol de lã,Moda,95,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
-17,Relógio analógico,Moda,400,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
-18,Conjunto de brincos,Moda,130,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
-19,Kit de skincare,Beleza & Bem-estar,160,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
-20,Difusor de aromaterapia,Beleza & Bem-estar,130,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
-21,Perfume importado,Beleza & Bem-estar,250,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
-22,Kit de barbearia,Beleza & Bem-estar,170,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
-23,Vela aromática artesanal,Beleza & Bem-estar,70,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
-24,Massageador elétrico,Beleza & Bem-estar,220,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
-25,Tapete de yoga,Esportes & Fitness,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
-26,Garrafa térmica esportiva,Esportes & Fitness,80,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
-27,Kit de halteres ajustáveis,Esportes & Fitness,350,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
-28,Bicicleta urbana,Esportes & Fitness,1800,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
-29,Bola de futebol oficial,Esportes & Fitness,130,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
-30,Relógio para corrida com GPS,Esportes & Fitness,700,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
-31,Jogo de tabuleiro estratégico,Jogos,150,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
-32,Quebra-cabeça 1000 peças,Jogos,70,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
-33,Console de videogame de mesa,Jogos,900,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
-34,Conjunto de cartas colecionáveis,Jogos,120,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
-35,Jogo de xadrez de madeira,Jogos,160,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
-36,Controle sem fio para videogame,Jogos,280,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
-37,Máquina de café expresso,Culinária,600,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
-38,Kit de facas profissionais,Culinária,350,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
-39,Tábua de queijos artesanal,Culinária,130,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
-40,Kit para preparo de drinks,Culinária,180,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
-41,Conjunto de taças para vinho,Culinária,150,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
-42,Panela de ferro fundido,Culinária,280,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
-43,Guitarra acústica iniciante,Música,700,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
-44,Vinil de edição especial,Música,140,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
-45,Teclado musical portátil,Música,550,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
-46,Fone de ouvido para estúdio,Música,450,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
-47,Ukulele decorado,Música,250,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
-48,Caixa de som retrô vintage,Música,320,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
-49,Kit de pintura em tela,Arte & Artesanato,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
-50,Conjunto de canetas para caligrafia,Arte & Artesanato,90,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
-51,Kit de cerâmica para iniciantes,Arte & Artesanato,160,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
-52,Caderno de desenho artesanal,Arte & Artesanato,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
-53,Kit de bordado,Arte & Artesanato,80,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
-54,Quadro decorativo pintado à mão,Arte & Artesanato,200,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
-55,Mala de viagem rígida,Viagem,450,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
-56,Travesseiro de pescoço para viagem,Viagem,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
-57,Kit de organizadores de bagagem,Viagem,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
-58,Garrafa térmica para trilhas,Viagem,95,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
-59,Mochila para notebook e viagem,Viagem,220,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
-60,Mapa-múndi de raspar,Viagem,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
-61,Cama acolchoada para pets,Pets,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
-62,Comedouro automático para pets,Pets,220,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
-63,Brinquedo interativo para cães,Pets,70,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
-64,Coleira personalizada,Pets,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
-65,Casinha decorativa para gatos,Pets,180,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
-66,Kit de higiene para pets,Pets,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
-67,Difusor de aromas com luz,Casa & Decoração,120,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
-68,Conjunto de almofadas decorativas,Casa & Decoração,140,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
-69,Vaso decorativo de cerâmica,Casa & Decoração,100,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
-70,Kit de jardinagem para apartamento,Casa & Decoração,95,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
-71,Luminária de mesa minimalista,Casa & Decoração,160,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
-72,Jogo de toalhas de banho,Casa & Decoração,130,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+1,Fone de ouvido bluetooth – Linha Essencial,Tecnologia,112,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+2,Fone de ouvido bluetooth – Versão Compacta,Tecnologia,135,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+3,Fone de ouvido bluetooth – Edição Padrão,Tecnologia,150,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+4,Fone de ouvido bluetooth – Linha Premium,Tecnologia,195,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+5,Fone de ouvido bluetooth – Versão Pro,Tecnologia,240,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+6,Fone de ouvido bluetooth – Edição Limitada,Tecnologia,285,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+7,Fone de ouvido bluetooth – Linha Colecionador,Tecnologia,345,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;jogos;fitness
+8,Smartwatch fitness – Linha Essencial,Tecnologia,488,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+9,Smartwatch fitness – Versão Compacta,Tecnologia,585,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+10,Smartwatch fitness – Edição Padrão,Tecnologia,650,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+11,Smartwatch fitness – Linha Premium,Tecnologia,845,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+12,Smartwatch fitness – Versão Pro,Tecnologia,1040,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+13,Smartwatch fitness – Edição Limitada,Tecnologia,1235,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+14,Smartwatch fitness – Linha Colecionador,Tecnologia,1495,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness;esportes;bem-estar
+15,Caixa de som portátil – Linha Essencial,Tecnologia,165,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+16,Caixa de som portátil – Versão Compacta,Tecnologia,198,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+17,Caixa de som portátil – Edição Padrão,Tecnologia,220,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+18,Caixa de som portátil – Linha Premium,Tecnologia,286,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+19,Caixa de som portátil – Versão Pro,Tecnologia,352,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+20,Caixa de som portátil – Edição Limitada,Tecnologia,418,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+21,Caixa de som portátil – Linha Colecionador,Tecnologia,506,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica;viagem;jogos
+22,Câmera instantânea – Linha Essencial,Tecnologia,262,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+23,Câmera instantânea – Versão Compacta,Tecnologia,315,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+24,Câmera instantânea – Edição Padrão,Tecnologia,350,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+25,Câmera instantânea – Linha Premium,Tecnologia,455,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+26,Câmera instantânea – Versão Pro,Tecnologia,560,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+27,Câmera instantânea – Edição Limitada,Tecnologia,665,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+28,Câmera instantânea – Linha Colecionador,Tecnologia,805,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia;viagem;arte
+29,Drone com câmera – Linha Essencial,Tecnologia,675,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+30,Drone com câmera – Versão Compacta,Tecnologia,810,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+31,Drone com câmera – Edição Padrão,Tecnologia,900,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+32,Drone com câmera – Linha Premium,Tecnologia,1170,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+33,Drone com câmera – Versão Pro,Tecnologia,1440,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+34,Drone com câmera – Edição Limitada,Tecnologia,1710,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+35,Drone com câmera – Linha Colecionador,Tecnologia,2070,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem;jogos
+36,Console portátil de videogame – Linha Essencial,Tecnologia,975,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+37,Console portátil de videogame – Versão Compacta,Tecnologia,1170,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+38,Console portátil de videogame – Edição Padrão,Tecnologia,1300,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+39,Console portátil de videogame – Linha Premium,Tecnologia,1690,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+40,Console portátil de videogame – Versão Pro,Tecnologia,2080,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+41,Console portátil de videogame – Edição Limitada,Tecnologia,2470,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+42,Console portátil de videogame – Linha Colecionador,Tecnologia,2990,10,40,Unissex,Aniversário;Natal,tecnologia;jogos;viagem
+43,Box coleção ficção científica – Linha Essencial,Livros,135,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+44,Box coleção ficção científica – Versão Compacta,Livros,162,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+45,Box coleção ficção científica – Edição Padrão,Livros,180,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+46,Box coleção ficção científica – Linha Premium,Livros,234,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+47,Box coleção ficção científica – Versão Pro,Livros,288,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+48,Box coleção ficção científica – Edição Limitada,Livros,342,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+49,Box coleção ficção científica – Linha Colecionador,Livros,414,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte;tecnologia
+50,Livro de poesia contemporânea – Linha Essencial,Livros,45,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+51,Livro de poesia contemporânea – Versão Compacta,Livros,54,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+52,Livro de poesia contemporânea – Edição Padrão,Livros,60,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+53,Livro de poesia contemporânea – Linha Premium,Livros,78,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+54,Livro de poesia contemporânea – Versão Pro,Livros,96,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+55,Livro de poesia contemporânea – Edição Limitada,Livros,114,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+56,Livro de poesia contemporânea – Linha Colecionador,Livros,138,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte;musica
+57,Romance best-seller – Linha Essencial,Livros,41,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+58,Romance best-seller – Versão Compacta,Livros,50,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+59,Romance best-seller – Edição Padrão,Livros,55,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+60,Romance best-seller – Linha Premium,Livros,72,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+61,Romance best-seller – Versão Pro,Livros,88,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+62,Romance best-seller – Edição Limitada,Livros,104,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+63,Romance best-seller – Linha Colecionador,Livros,126,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura;arte
+64,Livro de receitas gourmet – Linha Essencial,Livros,68,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+65,Livro de receitas gourmet – Versão Compacta,Livros,81,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+66,Livro de receitas gourmet – Edição Padrão,Livros,90,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+67,Livro de receitas gourmet – Linha Premium,Livros,117,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+68,Livro de receitas gourmet – Versão Pro,Livros,144,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+69,Livro de receitas gourmet – Edição Limitada,Livros,171,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+70,Livro de receitas gourmet – Linha Colecionador,Livros,207,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria;vinho;cafe
+71,Biografia inspiradora – Linha Essencial,Livros,52,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+72,Biografia inspiradora – Versão Compacta,Livros,63,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+73,Biografia inspiradora – Edição Padrão,Livros,70,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+74,Biografia inspiradora – Linha Premium,Livros,91,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+75,Biografia inspiradora – Versão Pro,Livros,112,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+76,Biografia inspiradora – Edição Limitada,Livros,133,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+77,Biografia inspiradora – Linha Colecionador,Livros,161,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura;bem-estar;arte
+78,Guia de viagem ilustrado – Linha Essencial,Livros,64,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+79,Guia de viagem ilustrado – Versão Compacta,Livros,76,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+80,Guia de viagem ilustrado – Edição Padrão,Livros,85,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+81,Guia de viagem ilustrado – Linha Premium,Livros,110,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+82,Guia de viagem ilustrado – Versão Pro,Livros,136,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+83,Guia de viagem ilustrado – Edição Limitada,Livros,162,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+84,Guia de viagem ilustrado – Linha Colecionador,Livros,195,16,99,Unissex,Aniversário;Formatura,leitura;viagem;fotografia;arte
+85,Carteira de couro – Linha Essencial,Moda,135,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+86,Carteira de couro – Versão Compacta,Moda,162,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+87,Carteira de couro – Edição Padrão,Moda,180,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+88,Carteira de couro – Linha Premium,Moda,234,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+89,Carteira de couro – Versão Pro,Moda,288,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+90,Carteira de couro – Edição Limitada,Moda,342,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+91,Carteira de couro – Linha Colecionador,Moda,414,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda;artesanato
+92,Bolsa transversal – Linha Essencial,Moda,165,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+93,Bolsa transversal – Versão Compacta,Moda,198,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+94,Bolsa transversal – Edição Padrão,Moda,220,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+95,Bolsa transversal – Linha Premium,Moda,286,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+96,Bolsa transversal – Versão Pro,Moda,352,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+97,Bolsa transversal – Edição Limitada,Moda,418,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+98,Bolsa transversal – Linha Colecionador,Moda,506,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda;viagem;artesanato
+99,Óculos de sol clássico – Linha Essencial,Moda,112,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+100,Óculos de sol clássico – Versão Compacta,Moda,135,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+101,Óculos de sol clássico – Edição Padrão,Moda,150,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+102,Óculos de sol clássico – Linha Premium,Moda,195,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+103,Óculos de sol clássico – Versão Pro,Moda,240,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+104,Óculos de sol clássico – Edição Limitada,Moda,285,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+105,Óculos de sol clássico – Linha Colecionador,Moda,345,16,99,Unissex,Aniversário;Natal;Formatura,moda;viagem;fotografia
+106,Cachecol de lã – Linha Essencial,Moda,71,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+107,Cachecol de lã – Versão Compacta,Moda,86,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+108,Cachecol de lã – Edição Padrão,Moda,95,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+109,Cachecol de lã – Linha Premium,Moda,124,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+110,Cachecol de lã – Versão Pro,Moda,152,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+111,Cachecol de lã – Edição Limitada,Moda,180,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+112,Cachecol de lã – Linha Colecionador,Moda,218,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda;artesanato
+113,Relógio analógico – Linha Essencial,Moda,300,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+114,Relógio analógico – Versão Compacta,Moda,360,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+115,Relógio analógico – Edição Padrão,Moda,400,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+116,Relógio analógico – Linha Premium,Moda,520,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+117,Relógio analógico – Versão Pro,Moda,640,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+118,Relógio analógico – Edição Limitada,Moda,760,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+119,Relógio analógico – Linha Colecionador,Moda,920,18,99,Masculino,Aniversário;Natal;Formatura,moda;artesanato
+120,Conjunto de brincos – Linha Essencial,Moda,98,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+121,Conjunto de brincos – Versão Compacta,Moda,117,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+122,Conjunto de brincos – Edição Padrão,Moda,130,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+123,Conjunto de brincos – Linha Premium,Moda,169,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+124,Conjunto de brincos – Versão Pro,Moda,208,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+125,Conjunto de brincos – Edição Limitada,Moda,247,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+126,Conjunto de brincos – Linha Colecionador,Moda,299,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza;artesanato
+127,Kit de skincare – Linha Essencial,Beleza & Bem-estar,120,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+128,Kit de skincare – Versão Compacta,Beleza & Bem-estar,144,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+129,Kit de skincare – Edição Padrão,Beleza & Bem-estar,160,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+130,Kit de skincare – Linha Premium,Beleza & Bem-estar,208,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+131,Kit de skincare – Versão Pro,Beleza & Bem-estar,256,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+132,Kit de skincare – Edição Limitada,Beleza & Bem-estar,304,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+133,Kit de skincare – Linha Colecionador,Beleza & Bem-estar,368,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar;moda
+134,Difusor de aromaterapia – Linha Essencial,Beleza & Bem-estar,98,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+135,Difusor de aromaterapia – Versão Compacta,Beleza & Bem-estar,117,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+136,Difusor de aromaterapia – Edição Padrão,Beleza & Bem-estar,130,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+137,Difusor de aromaterapia – Linha Premium,Beleza & Bem-estar,169,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+138,Difusor de aromaterapia – Versão Pro,Beleza & Bem-estar,208,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+139,Difusor de aromaterapia – Edição Limitada,Beleza & Bem-estar,247,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+140,Difusor de aromaterapia – Linha Colecionador,Beleza & Bem-estar,299,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao;beleza
+141,Perfume importado – Linha Essencial,Beleza & Bem-estar,188,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+142,Perfume importado – Versão Compacta,Beleza & Bem-estar,225,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+143,Perfume importado – Edição Padrão,Beleza & Bem-estar,250,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+144,Perfume importado – Linha Premium,Beleza & Bem-estar,325,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+145,Perfume importado – Versão Pro,Beleza & Bem-estar,400,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+146,Perfume importado – Edição Limitada,Beleza & Bem-estar,475,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+147,Perfume importado – Linha Colecionador,Beleza & Bem-estar,575,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza;moda;viagem
+148,Kit de barbearia – Linha Essencial,Beleza & Bem-estar,128,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+149,Kit de barbearia – Versão Compacta,Beleza & Bem-estar,153,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+150,Kit de barbearia – Edição Padrão,Beleza & Bem-estar,170,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+151,Kit de barbearia – Linha Premium,Beleza & Bem-estar,221,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+152,Kit de barbearia – Versão Pro,Beleza & Bem-estar,272,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+153,Kit de barbearia – Edição Limitada,Beleza & Bem-estar,323,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+154,Kit de barbearia – Linha Colecionador,Beleza & Bem-estar,391,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar;moda
+155,Vela aromática artesanal – Linha Essencial,Beleza & Bem-estar,52,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+156,Vela aromática artesanal – Versão Compacta,Beleza & Bem-estar,63,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+157,Vela aromática artesanal – Edição Padrão,Beleza & Bem-estar,70,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+158,Vela aromática artesanal – Linha Premium,Beleza & Bem-estar,91,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+159,Vela aromática artesanal – Versão Pro,Beleza & Bem-estar,112,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+160,Vela aromática artesanal – Edição Limitada,Beleza & Bem-estar,133,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+161,Vela aromática artesanal – Linha Colecionador,Beleza & Bem-estar,161,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato;decoracao
+162,Massageador elétrico – Linha Essencial,Beleza & Bem-estar,165,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+163,Massageador elétrico – Versão Compacta,Beleza & Bem-estar,198,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+164,Massageador elétrico – Edição Padrão,Beleza & Bem-estar,220,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+165,Massageador elétrico – Linha Premium,Beleza & Bem-estar,286,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+166,Massageador elétrico – Versão Pro,Beleza & Bem-estar,352,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+167,Massageador elétrico – Edição Limitada,Beleza & Bem-estar,418,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+168,Massageador elétrico – Linha Colecionador,Beleza & Bem-estar,506,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar;fitness;tecnologia
+169,Tapete de yoga – Linha Essencial,Esportes & Fitness,82,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+170,Tapete de yoga – Versão Compacta,Esportes & Fitness,99,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+171,Tapete de yoga – Edição Padrão,Esportes & Fitness,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+172,Tapete de yoga – Linha Premium,Esportes & Fitness,143,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+173,Tapete de yoga – Versão Pro,Esportes & Fitness,176,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+174,Tapete de yoga – Edição Limitada,Esportes & Fitness,209,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+175,Tapete de yoga – Linha Colecionador,Esportes & Fitness,253,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar;esportes
+176,Garrafa térmica esportiva – Linha Essencial,Esportes & Fitness,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+177,Garrafa térmica esportiva – Versão Compacta,Esportes & Fitness,72,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+178,Garrafa térmica esportiva – Edição Padrão,Esportes & Fitness,80,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+179,Garrafa térmica esportiva – Linha Premium,Esportes & Fitness,104,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+180,Garrafa térmica esportiva – Versão Pro,Esportes & Fitness,128,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+181,Garrafa térmica esportiva – Edição Limitada,Esportes & Fitness,152,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+182,Garrafa térmica esportiva – Linha Colecionador,Esportes & Fitness,184,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness;esportes;viagem;cafe
+183,Kit de halteres ajustáveis – Linha Essencial,Esportes & Fitness,262,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+184,Kit de halteres ajustáveis – Versão Compacta,Esportes & Fitness,315,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+185,Kit de halteres ajustáveis – Edição Padrão,Esportes & Fitness,350,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+186,Kit de halteres ajustáveis – Linha Premium,Esportes & Fitness,455,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+187,Kit de halteres ajustáveis – Versão Pro,Esportes & Fitness,560,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+188,Kit de halteres ajustáveis – Edição Limitada,Esportes & Fitness,665,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+189,Kit de halteres ajustáveis – Linha Colecionador,Esportes & Fitness,805,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes;bem-estar
+190,Bicicleta urbana – Linha Essencial,Esportes & Fitness,1350,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+191,Bicicleta urbana – Versão Compacta,Esportes & Fitness,1620,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+192,Bicicleta urbana – Edição Padrão,Esportes & Fitness,1800,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+193,Bicicleta urbana – Linha Premium,Esportes & Fitness,2340,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+194,Bicicleta urbana – Versão Pro,Esportes & Fitness,2880,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+195,Bicicleta urbana – Edição Limitada,Esportes & Fitness,3420,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+196,Bicicleta urbana – Linha Colecionador,Esportes & Fitness,4140,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness;viagem;bem-estar
+197,Bola de futebol oficial – Linha Essencial,Esportes & Fitness,98,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+198,Bola de futebol oficial – Versão Compacta,Esportes & Fitness,117,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+199,Bola de futebol oficial – Edição Padrão,Esportes & Fitness,130,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+200,Bola de futebol oficial – Linha Premium,Esportes & Fitness,169,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+201,Bola de futebol oficial – Versão Pro,Esportes & Fitness,208,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+202,Bola de futebol oficial – Edição Limitada,Esportes & Fitness,247,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+203,Bola de futebol oficial – Linha Colecionador,Esportes & Fitness,299,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes;jogos;fitness
+204,Relógio para corrida com GPS – Linha Essencial,Esportes & Fitness,525,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+205,Relógio para corrida com GPS – Versão Compacta,Esportes & Fitness,630,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+206,Relógio para corrida com GPS – Edição Padrão,Esportes & Fitness,700,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+207,Relógio para corrida com GPS – Linha Premium,Esportes & Fitness,910,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+208,Relógio para corrida com GPS – Versão Pro,Esportes & Fitness,1120,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+209,Relógio para corrida com GPS – Edição Limitada,Esportes & Fitness,1330,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+210,Relógio para corrida com GPS – Linha Colecionador,Esportes & Fitness,1610,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes;viagem
+211,Jogo de tabuleiro estratégico – Linha Essencial,Jogos,112,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+212,Jogo de tabuleiro estratégico – Versão Compacta,Jogos,135,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+213,Jogo de tabuleiro estratégico – Edição Padrão,Jogos,150,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+214,Jogo de tabuleiro estratégico – Linha Premium,Jogos,195,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+215,Jogo de tabuleiro estratégico – Versão Pro,Jogos,240,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+216,Jogo de tabuleiro estratégico – Edição Limitada,Jogos,285,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+217,Jogo de tabuleiro estratégico – Linha Colecionador,Jogos,345,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;leitura
+218,Quebra-cabeça 1000 peças – Linha Essencial,Jogos,52,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+219,Quebra-cabeça 1000 peças – Versão Compacta,Jogos,63,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+220,Quebra-cabeça 1000 peças – Edição Padrão,Jogos,70,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+221,Quebra-cabeça 1000 peças – Linha Premium,Jogos,91,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+222,Quebra-cabeça 1000 peças – Versão Pro,Jogos,112,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+223,Quebra-cabeça 1000 peças – Edição Limitada,Jogos,133,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+224,Quebra-cabeça 1000 peças – Linha Colecionador,Jogos,161,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte;decoracao
+225,Console de videogame de mesa – Linha Essencial,Jogos,675,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+226,Console de videogame de mesa – Versão Compacta,Jogos,810,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+227,Console de videogame de mesa – Edição Padrão,Jogos,900,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+228,Console de videogame de mesa – Linha Premium,Jogos,1170,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+229,Console de videogame de mesa – Versão Pro,Jogos,1440,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+230,Console de videogame de mesa – Edição Limitada,Jogos,1710,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+231,Console de videogame de mesa – Linha Colecionador,Jogos,2070,10,50,Unissex,Aniversário;Natal,jogos;tecnologia;musica
+232,Conjunto de cartas colecionáveis – Linha Essencial,Jogos,90,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+233,Conjunto de cartas colecionáveis – Versão Compacta,Jogos,108,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+234,Conjunto de cartas colecionáveis – Edição Padrão,Jogos,120,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+235,Conjunto de cartas colecionáveis – Linha Premium,Jogos,156,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+236,Conjunto de cartas colecionáveis – Versão Pro,Jogos,192,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+237,Conjunto de cartas colecionáveis – Edição Limitada,Jogos,228,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+238,Conjunto de cartas colecionáveis – Linha Colecionador,Jogos,276,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos;arte;artesanato
+239,Jogo de xadrez de madeira – Linha Essencial,Jogos,120,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+240,Jogo de xadrez de madeira – Versão Compacta,Jogos,144,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+241,Jogo de xadrez de madeira – Edição Padrão,Jogos,160,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+242,Jogo de xadrez de madeira – Linha Premium,Jogos,208,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+243,Jogo de xadrez de madeira – Versão Pro,Jogos,256,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+244,Jogo de xadrez de madeira – Edição Limitada,Jogos,304,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+245,Jogo de xadrez de madeira – Linha Colecionador,Jogos,368,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato;decoracao
+246,Controle sem fio para videogame – Linha Essencial,Jogos,210,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+247,Controle sem fio para videogame – Versão Compacta,Jogos,252,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+248,Controle sem fio para videogame – Edição Padrão,Jogos,280,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+249,Controle sem fio para videogame – Linha Premium,Jogos,364,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+250,Controle sem fio para videogame – Versão Pro,Jogos,448,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+251,Controle sem fio para videogame – Edição Limitada,Jogos,532,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+252,Controle sem fio para videogame – Linha Colecionador,Jogos,644,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia;musica
+253,Máquina de café expresso – Linha Essencial,Culinária,450,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+254,Máquina de café expresso – Versão Compacta,Culinária,540,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+255,Máquina de café expresso – Edição Padrão,Culinária,600,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+256,Máquina de café expresso – Linha Premium,Culinária,780,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+257,Máquina de café expresso – Versão Pro,Culinária,960,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+258,Máquina de café expresso – Edição Limitada,Culinária,1140,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+259,Máquina de café expresso – Linha Colecionador,Culinária,1380,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe;tecnologia;decoracao
+260,Kit de facas profissionais – Linha Essencial,Culinária,262,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+261,Kit de facas profissionais – Versão Compacta,Culinária,315,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+262,Kit de facas profissionais – Edição Padrão,Culinária,350,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+263,Kit de facas profissionais – Linha Premium,Culinária,455,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+264,Kit de facas profissionais – Versão Pro,Culinária,560,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+265,Kit de facas profissionais – Edição Limitada,Culinária,665,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+266,Kit de facas profissionais – Linha Colecionador,Culinária,805,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;decoracao
+267,Tábua de queijos artesanal – Linha Essencial,Culinária,98,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+268,Tábua de queijos artesanal – Versão Compacta,Culinária,117,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+269,Tábua de queijos artesanal – Edição Padrão,Culinária,130,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+270,Tábua de queijos artesanal – Linha Premium,Culinária,169,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+271,Tábua de queijos artesanal – Versão Pro,Culinária,208,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+272,Tábua de queijos artesanal – Edição Limitada,Culinária,247,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+273,Tábua de queijos artesanal – Linha Colecionador,Culinária,299,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato;vinho;decoracao
+274,Kit para preparo de drinks – Linha Essencial,Culinária,135,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+275,Kit para preparo de drinks – Versão Compacta,Culinária,162,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+276,Kit para preparo de drinks – Edição Padrão,Culinária,180,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+277,Kit para preparo de drinks – Linha Premium,Culinária,234,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+278,Kit para preparo de drinks – Versão Pro,Culinária,288,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+279,Kit para preparo de drinks – Edição Limitada,Culinária,342,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+280,Kit para preparo de drinks – Linha Colecionador,Culinária,414,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria;vinho;decoracao
+281,Conjunto de taças para vinho – Linha Essencial,Culinária,112,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+282,Conjunto de taças para vinho – Versão Compacta,Culinária,135,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+283,Conjunto de taças para vinho – Edição Padrão,Culinária,150,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+284,Conjunto de taças para vinho – Linha Premium,Culinária,195,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+285,Conjunto de taças para vinho – Versão Pro,Culinária,240,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+286,Conjunto de taças para vinho – Edição Limitada,Culinária,285,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+287,Conjunto de taças para vinho – Linha Colecionador,Culinária,345,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho;decoracao;arte
+288,Panela de ferro fundido – Linha Essencial,Culinária,210,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+289,Panela de ferro fundido – Versão Compacta,Culinária,252,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+290,Panela de ferro fundido – Edição Padrão,Culinária,280,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+291,Panela de ferro fundido – Linha Premium,Culinária,364,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+292,Panela de ferro fundido – Versão Pro,Culinária,448,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+293,Panela de ferro fundido – Edição Limitada,Culinária,532,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+294,Panela de ferro fundido – Linha Colecionador,Culinária,644,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria;artesanato;decoracao
+295,Guitarra acústica iniciante – Linha Essencial,Música,525,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+296,Guitarra acústica iniciante – Versão Compacta,Música,630,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+297,Guitarra acústica iniciante – Edição Padrão,Música,700,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+298,Guitarra acústica iniciante – Linha Premium,Música,910,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+299,Guitarra acústica iniciante – Versão Pro,Música,1120,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+300,Guitarra acústica iniciante – Edição Limitada,Música,1330,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+301,Guitarra acústica iniciante – Linha Colecionador,Música,1610,12,99,Unissex,Aniversário;Natal;Formatura,musica;arte
+302,Vinil de edição especial – Linha Essencial,Música,105,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+303,Vinil de edição especial – Versão Compacta,Música,126,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+304,Vinil de edição especial – Edição Padrão,Música,140,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+305,Vinil de edição especial – Linha Premium,Música,182,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+306,Vinil de edição especial – Versão Pro,Música,224,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+307,Vinil de edição especial – Edição Limitada,Música,266,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+308,Vinil de edição especial – Linha Colecionador,Música,322,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;decoracao;arte
+309,Teclado musical portátil – Linha Essencial,Música,412,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+310,Teclado musical portátil – Versão Compacta,Música,495,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+311,Teclado musical portátil – Edição Padrão,Música,550,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+312,Teclado musical portátil – Linha Premium,Música,715,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+313,Teclado musical portátil – Versão Pro,Música,880,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+314,Teclado musical portátil – Edição Limitada,Música,1045,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+315,Teclado musical portátil – Linha Colecionador,Música,1265,10,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+316,Fone de ouvido para estúdio – Linha Essencial,Música,338,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+317,Fone de ouvido para estúdio – Versão Compacta,Música,405,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+318,Fone de ouvido para estúdio – Edição Padrão,Música,450,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+319,Fone de ouvido para estúdio – Linha Premium,Música,585,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+320,Fone de ouvido para estúdio – Versão Pro,Música,720,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+321,Fone de ouvido para estúdio – Edição Limitada,Música,855,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+322,Fone de ouvido para estúdio – Linha Colecionador,Música,1035,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia;arte
+323,Ukulele decorado – Linha Essencial,Música,188,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+324,Ukulele decorado – Versão Compacta,Música,225,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+325,Ukulele decorado – Edição Padrão,Música,250,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+326,Ukulele decorado – Linha Premium,Música,325,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+327,Ukulele decorado – Versão Pro,Música,400,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+328,Ukulele decorado – Edição Limitada,Música,475,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+329,Ukulele decorado – Linha Colecionador,Música,575,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte;artesanato;viagem
+330,Caixa de som retrô vintage – Linha Essencial,Música,240,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+331,Caixa de som retrô vintage – Versão Compacta,Música,288,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+332,Caixa de som retrô vintage – Edição Padrão,Música,320,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+333,Caixa de som retrô vintage – Linha Premium,Música,416,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+334,Caixa de som retrô vintage – Versão Pro,Música,512,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+335,Caixa de som retrô vintage – Edição Limitada,Música,608,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+336,Caixa de som retrô vintage – Linha Colecionador,Música,736,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao;arte
+337,Kit de pintura em tela – Linha Essencial,Arte & Artesanato,98,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+338,Kit de pintura em tela – Versão Compacta,Arte & Artesanato,117,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+339,Kit de pintura em tela – Edição Padrão,Arte & Artesanato,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+340,Kit de pintura em tela – Linha Premium,Arte & Artesanato,169,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+341,Kit de pintura em tela – Versão Pro,Arte & Artesanato,208,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+342,Kit de pintura em tela – Edição Limitada,Arte & Artesanato,247,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+343,Kit de pintura em tela – Linha Colecionador,Arte & Artesanato,299,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;decoracao;artesanato
+344,Conjunto de canetas para caligrafia – Linha Essencial,Arte & Artesanato,68,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+345,Conjunto de canetas para caligrafia – Versão Compacta,Arte & Artesanato,81,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+346,Conjunto de canetas para caligrafia – Edição Padrão,Arte & Artesanato,90,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+347,Conjunto de canetas para caligrafia – Linha Premium,Arte & Artesanato,117,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+348,Conjunto de canetas para caligrafia – Versão Pro,Arte & Artesanato,144,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+349,Conjunto de canetas para caligrafia – Edição Limitada,Arte & Artesanato,171,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+350,Conjunto de canetas para caligrafia – Linha Colecionador,Arte & Artesanato,207,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato;leitura
+351,Kit de cerâmica para iniciantes – Linha Essencial,Arte & Artesanato,120,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+352,Kit de cerâmica para iniciantes – Versão Compacta,Arte & Artesanato,144,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+353,Kit de cerâmica para iniciantes – Edição Padrão,Arte & Artesanato,160,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+354,Kit de cerâmica para iniciantes – Linha Premium,Arte & Artesanato,208,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+355,Kit de cerâmica para iniciantes – Versão Pro,Arte & Artesanato,256,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+356,Kit de cerâmica para iniciantes – Edição Limitada,Arte & Artesanato,304,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+357,Kit de cerâmica para iniciantes – Linha Colecionador,Arte & Artesanato,368,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato;decoracao
+358,Caderno de desenho artesanal – Linha Essencial,Arte & Artesanato,45,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+359,Caderno de desenho artesanal – Versão Compacta,Arte & Artesanato,54,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+360,Caderno de desenho artesanal – Edição Padrão,Arte & Artesanato,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+361,Caderno de desenho artesanal – Linha Premium,Arte & Artesanato,78,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+362,Caderno de desenho artesanal – Versão Pro,Arte & Artesanato,96,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+363,Caderno de desenho artesanal – Edição Limitada,Arte & Artesanato,114,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+364,Caderno de desenho artesanal – Linha Colecionador,Arte & Artesanato,138,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato;leitura
+365,Kit de bordado – Linha Essencial,Arte & Artesanato,60,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+366,Kit de bordado – Versão Compacta,Arte & Artesanato,72,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+367,Kit de bordado – Edição Padrão,Arte & Artesanato,80,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+368,Kit de bordado – Linha Premium,Arte & Artesanato,104,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+369,Kit de bordado – Versão Pro,Arte & Artesanato,128,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+370,Kit de bordado – Edição Limitada,Arte & Artesanato,152,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+371,Kit de bordado – Linha Colecionador,Arte & Artesanato,184,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato;moda;decoracao
+372,Quadro decorativo pintado à mão – Linha Essencial,Arte & Artesanato,150,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+373,Quadro decorativo pintado à mão – Versão Compacta,Arte & Artesanato,180,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+374,Quadro decorativo pintado à mão – Edição Padrão,Arte & Artesanato,200,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+375,Quadro decorativo pintado à mão – Linha Premium,Arte & Artesanato,260,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+376,Quadro decorativo pintado à mão – Versão Pro,Arte & Artesanato,320,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+377,Quadro decorativo pintado à mão – Edição Limitada,Arte & Artesanato,380,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+378,Quadro decorativo pintado à mão – Linha Colecionador,Arte & Artesanato,460,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao;artesanato
+379,Mala de viagem rígida – Linha Essencial,Viagem,338,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+380,Mala de viagem rígida – Versão Compacta,Viagem,405,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+381,Mala de viagem rígida – Edição Padrão,Viagem,450,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+382,Mala de viagem rígida – Linha Premium,Viagem,585,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+383,Mala de viagem rígida – Versão Pro,Viagem,720,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+384,Mala de viagem rígida – Edição Limitada,Viagem,855,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+385,Mala de viagem rígida – Linha Colecionador,Viagem,1035,16,99,Unissex,Aniversário;Natal;Formatura,viagem;moda
+386,Travesseiro de pescoço para viagem – Linha Essencial,Viagem,45,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+387,Travesseiro de pescoço para viagem – Versão Compacta,Viagem,54,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+388,Travesseiro de pescoço para viagem – Edição Padrão,Viagem,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+389,Travesseiro de pescoço para viagem – Linha Premium,Viagem,78,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+390,Travesseiro de pescoço para viagem – Versão Pro,Viagem,96,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+391,Travesseiro de pescoço para viagem – Edição Limitada,Viagem,114,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+392,Travesseiro de pescoço para viagem – Linha Colecionador,Viagem,138,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;bem-estar
+393,Kit de organizadores de bagagem – Linha Essencial,Viagem,68,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+394,Kit de organizadores de bagagem – Versão Compacta,Viagem,81,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+395,Kit de organizadores de bagagem – Edição Padrão,Viagem,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+396,Kit de organizadores de bagagem – Linha Premium,Viagem,117,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+397,Kit de organizadores de bagagem – Versão Pro,Viagem,144,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+398,Kit de organizadores de bagagem – Edição Limitada,Viagem,171,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+399,Kit de organizadores de bagagem – Linha Colecionador,Viagem,207,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem;moda
+400,Garrafa térmica para trilhas – Linha Essencial,Viagem,71,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+401,Garrafa térmica para trilhas – Versão Compacta,Viagem,86,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+402,Garrafa térmica para trilhas – Edição Padrão,Viagem,95,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+403,Garrafa térmica para trilhas – Linha Premium,Viagem,124,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+404,Garrafa térmica para trilhas – Versão Pro,Viagem,152,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+405,Garrafa térmica para trilhas – Edição Limitada,Viagem,180,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+406,Garrafa térmica para trilhas – Linha Colecionador,Viagem,218,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes;fitness
+407,Mochila para notebook e viagem – Linha Essencial,Viagem,165,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+408,Mochila para notebook e viagem – Versão Compacta,Viagem,198,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+409,Mochila para notebook e viagem – Edição Padrão,Viagem,220,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+410,Mochila para notebook e viagem – Linha Premium,Viagem,286,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+411,Mochila para notebook e viagem – Versão Pro,Viagem,352,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+412,Mochila para notebook e viagem – Edição Limitada,Viagem,418,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+413,Mochila para notebook e viagem – Linha Colecionador,Viagem,506,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia;moda
+414,Mapa-múndi de raspar – Linha Essencial,Viagem,82,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+415,Mapa-múndi de raspar – Versão Compacta,Viagem,99,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+416,Mapa-múndi de raspar – Edição Padrão,Viagem,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+417,Mapa-múndi de raspar – Linha Premium,Viagem,143,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+418,Mapa-múndi de raspar – Versão Pro,Viagem,176,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+419,Mapa-múndi de raspar – Edição Limitada,Viagem,209,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+420,Mapa-múndi de raspar – Linha Colecionador,Viagem,253,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao;arte
+421,Cama acolchoada para pets – Linha Essencial,Pets,98,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+422,Cama acolchoada para pets – Versão Compacta,Pets,117,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+423,Cama acolchoada para pets – Edição Padrão,Pets,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+424,Cama acolchoada para pets – Linha Premium,Pets,169,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+425,Cama acolchoada para pets – Versão Pro,Pets,208,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+426,Cama acolchoada para pets – Edição Limitada,Pets,247,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+427,Cama acolchoada para pets – Linha Colecionador,Pets,299,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;decoracao;bem-estar
+428,Comedouro automático para pets – Linha Essencial,Pets,165,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+429,Comedouro automático para pets – Versão Compacta,Pets,198,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+430,Comedouro automático para pets – Edição Padrão,Pets,220,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+431,Comedouro automático para pets – Linha Premium,Pets,286,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+432,Comedouro automático para pets – Versão Pro,Pets,352,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+433,Comedouro automático para pets – Edição Limitada,Pets,418,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+434,Comedouro automático para pets – Linha Colecionador,Pets,506,16,99,Unissex,Aniversário;Natal,pets;tecnologia;bem-estar
+435,Brinquedo interativo para cães – Linha Essencial,Pets,52,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+436,Brinquedo interativo para cães – Versão Compacta,Pets,63,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+437,Brinquedo interativo para cães – Edição Padrão,Pets,70,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+438,Brinquedo interativo para cães – Linha Premium,Pets,91,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+439,Brinquedo interativo para cães – Versão Pro,Pets,112,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+440,Brinquedo interativo para cães – Edição Limitada,Pets,133,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+441,Brinquedo interativo para cães – Linha Colecionador,Pets,161,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;jogos;fitness
+442,Coleira personalizada – Linha Essencial,Pets,45,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+443,Coleira personalizada – Versão Compacta,Pets,54,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+444,Coleira personalizada – Edição Padrão,Pets,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+445,Coleira personalizada – Linha Premium,Pets,78,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+446,Coleira personalizada – Versão Pro,Pets,96,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+447,Coleira personalizada – Edição Limitada,Pets,114,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+448,Coleira personalizada – Linha Colecionador,Pets,138,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato;moda
+449,Casinha decorativa para gatos – Linha Essencial,Pets,135,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+450,Casinha decorativa para gatos – Versão Compacta,Pets,162,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+451,Casinha decorativa para gatos – Edição Padrão,Pets,180,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+452,Casinha decorativa para gatos – Linha Premium,Pets,234,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+453,Casinha decorativa para gatos – Versão Pro,Pets,288,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+454,Casinha decorativa para gatos – Edição Limitada,Pets,342,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+455,Casinha decorativa para gatos – Linha Colecionador,Pets,414,14,99,Unissex,Aniversário;Natal,pets;decoracao;artesanato
+456,Kit de higiene para pets – Linha Essencial,Pets,68,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+457,Kit de higiene para pets – Versão Compacta,Pets,81,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+458,Kit de higiene para pets – Edição Padrão,Pets,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+459,Kit de higiene para pets – Linha Premium,Pets,117,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+460,Kit de higiene para pets – Versão Pro,Pets,144,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+461,Kit de higiene para pets – Edição Limitada,Pets,171,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+462,Kit de higiene para pets – Linha Colecionador,Pets,207,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+463,Difusor de aromas com luz – Linha Essencial,Casa & Decoração,90,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+464,Difusor de aromas com luz – Versão Compacta,Casa & Decoração,108,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+465,Difusor de aromas com luz – Edição Padrão,Casa & Decoração,120,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+466,Difusor de aromas com luz – Linha Premium,Casa & Decoração,156,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+467,Difusor de aromas com luz – Versão Pro,Casa & Decoração,192,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+468,Difusor de aromas com luz – Edição Limitada,Casa & Decoração,228,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+469,Difusor de aromas com luz – Linha Colecionador,Casa & Decoração,276,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar;beleza
+470,Conjunto de almofadas decorativas – Linha Essencial,Casa & Decoração,105,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+471,Conjunto de almofadas decorativas – Versão Compacta,Casa & Decoração,126,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+472,Conjunto de almofadas decorativas – Edição Padrão,Casa & Decoração,140,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+473,Conjunto de almofadas decorativas – Linha Premium,Casa & Decoração,182,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+474,Conjunto de almofadas decorativas – Versão Pro,Casa & Decoração,224,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+475,Conjunto de almofadas decorativas – Edição Limitada,Casa & Decoração,266,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+476,Conjunto de almofadas decorativas – Linha Colecionador,Casa & Decoração,322,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao;artesanato
+477,Vaso decorativo de cerâmica – Linha Essencial,Casa & Decoração,75,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+478,Vaso decorativo de cerâmica – Versão Compacta,Casa & Decoração,90,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+479,Vaso decorativo de cerâmica – Edição Padrão,Casa & Decoração,100,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+480,Vaso decorativo de cerâmica – Linha Premium,Casa & Decoração,130,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+481,Vaso decorativo de cerâmica – Versão Pro,Casa & Decoração,160,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+482,Vaso decorativo de cerâmica – Edição Limitada,Casa & Decoração,190,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+483,Vaso decorativo de cerâmica – Linha Colecionador,Casa & Decoração,230,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte;jardinagem
+484,Kit de jardinagem para apartamento – Linha Essencial,Casa & Decoração,71,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+485,Kit de jardinagem para apartamento – Versão Compacta,Casa & Decoração,86,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+486,Kit de jardinagem para apartamento – Edição Padrão,Casa & Decoração,95,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+487,Kit de jardinagem para apartamento – Linha Premium,Casa & Decoração,124,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+488,Kit de jardinagem para apartamento – Versão Pro,Casa & Decoração,152,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+489,Kit de jardinagem para apartamento – Edição Limitada,Casa & Decoração,180,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+490,Kit de jardinagem para apartamento – Linha Colecionador,Casa & Decoração,218,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao;bem-estar
+491,Luminária de mesa minimalista – Linha Essencial,Casa & Decoração,120,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+492,Luminária de mesa minimalista – Versão Compacta,Casa & Decoração,144,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+493,Luminária de mesa minimalista – Edição Padrão,Casa & Decoração,160,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+494,Luminária de mesa minimalista – Linha Premium,Casa & Decoração,208,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+495,Luminária de mesa minimalista – Versão Pro,Casa & Decoração,256,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+496,Luminária de mesa minimalista – Edição Limitada,Casa & Decoração,304,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+497,Luminária de mesa minimalista – Linha Colecionador,Casa & Decoração,368,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+498,Jogo de toalhas de banho – Linha Essencial,Casa & Decoração,98,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+499,Jogo de toalhas de banho – Versão Compacta,Casa & Decoração,117,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+500,Jogo de toalhas de banho – Edição Padrão,Casa & Decoração,130,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+501,Jogo de toalhas de banho – Linha Premium,Casa & Decoração,169,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+502,Jogo de toalhas de banho – Versão Pro,Casa & Decoração,208,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+503,Jogo de toalhas de banho – Edição Limitada,Casa & Decoração,247,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
+504,Jogo de toalhas de banho – Linha Colecionador,Casa & Decoração,299,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao;bem-estar
