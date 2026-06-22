@@ -52,6 +52,21 @@ def test_fallback_quando_perfil_fica_zerado(recomendador):
     assert all(item["compatibilidade"] is None for item in resultados)
 
 
+def test_diversidade_limita_itens_por_categoria(recomendador):
+    resultados, _ = recomendador.recomendar(
+        idade=28,
+        genero="Unissex",
+        orcamento=1000,
+        ocasiao="Aniversário",
+        interesses=["leitura", "musica", "arte", "decoracao", "tecnologia"],
+        top_n=8,
+    )
+    contagem_por_categoria = {}
+    for item in resultados:
+        contagem_por_categoria[item["categoria"]] = contagem_por_categoria.get(item["categoria"], 0) + 1
+    assert all(quantidade <= 2 for quantidade in contagem_por_categoria.values())
+
+
 def test_tipos_dos_resultados_sao_nativos(recomendador):
     resultados, _ = recomendador.recomendar(
         idade=28,

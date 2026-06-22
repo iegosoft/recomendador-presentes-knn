@@ -64,17 +64,23 @@ uma lista vazia quando só faltavam alguns reais para encaixar um item bom.
 ### 2. Ranqueamento por similaridade de cosseno (KNN)
 
 Cada presente do catálogo é representado por um vetor multi-hot: uma
-posição para cada tag do vocabulário e uma posição para cada ocasião,
-marcadas com 1 quando o presente tem aquela característica. O perfil
-informado no formulário é convertido para o mesmo formato de vetor a
-partir dos interesses e da ocasião escolhidos. Quando a ocasião escolhida
-é "Sem ocasião específica", a parte do vetor referente a ocasião fica
-zerada e só os interesses contam.
+posição para cada tag do vocabulário e uma posição para cada ocasião. O
+perfil informado no formulário é convertido para o mesmo formato de vetor
+a partir dos interesses e da ocasião escolhidos. Quando a ocasião
+escolhida é "Sem ocasião específica", a parte do vetor referente a
+ocasião fica zerada e só os interesses contam.
+
+As duas partes do vetor têm pesos diferentes: a parte de interesses pesa
+o dobro da parte de ocasião (`PESO_TAGS = 1.0` contra `PESO_OCASIAO =
+0.5` em `recommender.py`), porque o interesse é o sinal mais forte de que
+*tipo* de presente combina com a pessoa — a ocasião é só contexto
+adicional.
 
 Com os itens já filtrados e vetorizados, o `NearestNeighbors` do
-scikit-learn (`metric="cosine"`) encontra os vizinhos mais próximos do
-vetor de perfil, e a distância de cosseno é convertida em porcentagem de
-compatibilidade (`(1 - distância) * 100`).
+scikit-learn (`metric="cosine"`) busca um pool de candidatos bem maior do
+que o número de resultados exibidos (4x), e a distância de cosseno de
+cada um é convertida em porcentagem de compatibilidade
+(`(1 - distância) * 100`).
 
 **Por que cosseno e não distância euclidiana:** os vetores aqui são
 multi-hot e esparsos — o que importa é a *proporção* de características em
@@ -86,7 +92,22 @@ pelo simples fato de o vetor ser "maior". Cosseno mede o ângulo entre os
 vetores, ignorando magnitude, o que é exatamente a noção de similaridade
 que faz sentido para conjuntos de características como tags e ocasiões.
 
+### 3. Diversidade e desempate
+
+Pegar só os 6 itens mais parecidos do pool, sem mais nada, tende a
+devolver uma lista dominada por uma única categoria (ex: 4 livros em 6
+resultados), porque itens da mesma categoria tendem a compartilhar tags.
+Por isso, antes de cortar para os itens exibidos, o pool maior passa por
+uma seleção que limita em 2 o número de itens por categoria
+(`MAX_ITENS_POR_CATEGORIA`), preenchendo o restante das vagas com os
+próximos melhores de outras categorias. Quando duas opções têm exatamente
+a mesma compatibilidade, o desempate é pela proximidade do preço ao
+orçamento informado. O resultado final é sempre reordenado por
+compatibilidade antes de ser devolvido.
+
+### 4. Fallback para perfil sem correspondência
+
 Se o vetor de perfil resultar todo zerado (nenhum interesse ou ocasião
-reconhecida no vocabulário), o sistema cai num fallback: em vez de KNN,
-ordena os itens filtrados pela proximidade ao orçamento informado, sem
-gerar erro.
+reconhecida no vocabulário), o sistema não tenta calcular cosseno — cai
+num fallback que ordena os itens filtrados pela proximidade ao orçamento
+informado, sem gerar erro.
