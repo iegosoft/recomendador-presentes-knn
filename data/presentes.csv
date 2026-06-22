@@ -1,0 +1,73 @@
+id,nome,categoria,preco,idade_min,idade_max,genero,ocasiao,tags
+1,Fone de ouvido bluetooth,Tecnologia,150,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica
+2,Smartwatch fitness,Tecnologia,650,16,65,Unissex,Aniversário;Natal;Formatura,tecnologia;fitness
+3,Caixa de som portátil,Tecnologia,220,12,99,Unissex,Aniversário;Amigo Secreto;Natal,tecnologia;musica
+4,Câmera instantânea,Tecnologia,350,14,60,Unissex,Aniversário;Natal;Formatura,tecnologia;fotografia
+5,Drone com câmera,Tecnologia,900,16,50,Masculino,Aniversário;Natal,tecnologia;fotografia;viagem
+6,Console portátil de videogame,Tecnologia,1300,10,40,Unissex,Aniversário;Natal,tecnologia;jogos
+7,Box coleção ficção científica,Livros,180,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura
+8,Livro de poesia contemporânea,Livros,60,16,99,Feminino,Aniversário;Amigo Secreto;Dia dos Namorados,leitura;arte
+9,Romance best-seller,Livros,55,14,99,Unissex,Aniversário;Amigo Secreto;Natal,leitura
+10,Livro de receitas gourmet,Livros,90,18,99,Unissex,Aniversário;Natal;Dia das Mães,leitura;culinaria
+11,Biografia inspiradora,Livros,70,18,99,Masculino,Aniversário;Dia dos Pais;Formatura,leitura
+12,Guia de viagem ilustrado,Livros,85,16,99,Unissex,Aniversário;Formatura,leitura;viagem
+13,Carteira de couro,Moda,180,18,99,Masculino,Aniversário;Dia dos Pais;Natal,moda
+14,Bolsa transversal,Moda,220,16,99,Feminino,Aniversário;Dia das Mães;Natal,moda
+15,Óculos de sol clássico,Moda,150,16,99,Unissex,Aniversário;Natal;Formatura,moda
+16,Cachecol de lã,Moda,95,14,99,Unissex,Aniversário;Amigo Secreto;Natal,moda
+17,Relógio analógico,Moda,400,18,99,Masculino,Aniversário;Natal;Formatura,moda
+18,Conjunto de brincos,Moda,130,14,99,Feminino,Aniversário;Dia dos Namorados;Natal,moda;beleza
+19,Kit de skincare,Beleza & Bem-estar,160,16,99,Feminino,Aniversário;Dia das Mães;Natal,beleza;bem-estar
+20,Difusor de aromaterapia,Beleza & Bem-estar,130,18,99,Unissex,Aniversário;Natal;Dia das Mães,bem-estar;decoracao
+21,Perfume importado,Beleza & Bem-estar,250,18,99,Unissex,Aniversário;Dia dos Namorados;Natal,beleza
+22,Kit de barbearia,Beleza & Bem-estar,170,18,99,Masculino,Aniversário;Dia dos Pais;Natal,beleza;bem-estar
+23,Vela aromática artesanal,Beleza & Bem-estar,70,16,99,Unissex,Aniversário;Amigo Secreto;Natal,bem-estar;artesanato
+24,Massageador elétrico,Beleza & Bem-estar,220,18,99,Unissex,Aniversário;Dia das Mães;Dia dos Pais,bem-estar
+25,Tapete de yoga,Esportes & Fitness,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,fitness;bem-estar
+26,Garrafa térmica esportiva,Esportes & Fitness,80,12,99,Unissex,Aniversário;Amigo Secreto;Natal,fitness
+27,Kit de halteres ajustáveis,Esportes & Fitness,350,16,99,Masculino,Aniversário;Natal;Dia dos Pais,fitness;esportes
+28,Bicicleta urbana,Esportes & Fitness,1800,14,60,Unissex,Aniversário;Natal;Formatura,esportes;fitness
+29,Bola de futebol oficial,Esportes & Fitness,130,8,99,Masculino,Aniversário;Natal;Amigo Secreto,esportes
+30,Relógio para corrida com GPS,Esportes & Fitness,700,16,65,Unissex,Aniversário;Natal;Formatura,fitness;tecnologia;esportes
+31,Jogo de tabuleiro estratégico,Jogos,150,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos
+32,Quebra-cabeça 1000 peças,Jogos,70,10,99,Unissex,Aniversário;Amigo Secreto;Natal,jogos;arte
+33,Console de videogame de mesa,Jogos,900,10,50,Unissex,Aniversário;Natal,jogos;tecnologia
+34,Conjunto de cartas colecionáveis,Jogos,120,10,40,Masculino,Aniversário;Amigo Secreto;Natal,jogos
+35,Jogo de xadrez de madeira,Jogos,160,12,99,Unissex,Aniversário;Natal;Formatura,jogos;artesanato
+36,Controle sem fio para videogame,Jogos,280,12,60,Unissex,Aniversário;Natal;Amigo Secreto,jogos;tecnologia
+37,Máquina de café expresso,Culinária,600,18,99,Unissex,Aniversário;Natal;Dia das Mães,culinaria;cafe
+38,Kit de facas profissionais,Culinária,350,18,99,Unissex,Aniversário;Natal;Casamento,culinaria
+39,Tábua de queijos artesanal,Culinária,130,18,99,Unissex,Aniversário;Natal;Casamento,culinaria;artesanato
+40,Kit para preparo de drinks,Culinária,180,18,99,Masculino,Aniversário;Natal;Amigo Secreto,culinaria
+41,Conjunto de taças para vinho,Culinária,150,18,99,Unissex,Aniversário;Casamento;Natal,culinaria;vinho
+42,Panela de ferro fundido,Culinária,280,18,99,Unissex,Casamento;Natal;Dia das Mães,culinaria
+43,Guitarra acústica iniciante,Música,700,12,99,Unissex,Aniversário;Natal;Formatura,musica
+44,Vinil de edição especial,Música,140,16,99,Unissex,Aniversário;Amigo Secreto;Natal,musica
+45,Teclado musical portátil,Música,550,10,99,Unissex,Aniversário;Natal;Formatura,musica
+46,Fone de ouvido para estúdio,Música,450,16,99,Unissex,Aniversário;Natal;Formatura,musica;tecnologia
+47,Ukulele decorado,Música,250,10,99,Unissex,Aniversário;Amigo Secreto;Natal,musica;arte
+48,Caixa de som retrô vintage,Música,320,16,99,Unissex,Aniversário;Natal,musica;tecnologia;decoracao
+49,Kit de pintura em tela,Arte & Artesanato,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte
+50,Conjunto de canetas para caligrafia,Arte & Artesanato,90,14,99,Unissex,Aniversário;Amigo Secreto;Formatura,arte;artesanato
+51,Kit de cerâmica para iniciantes,Arte & Artesanato,160,14,99,Feminino,Aniversário;Natal;Amigo Secreto,arte;artesanato
+52,Caderno de desenho artesanal,Arte & Artesanato,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,arte;artesanato
+53,Kit de bordado,Arte & Artesanato,80,14,99,Feminino,Aniversário;Amigo Secreto;Natal,artesanato
+54,Quadro decorativo pintado à mão,Arte & Artesanato,200,16,99,Unissex,Aniversário;Casamento;Natal,arte;decoracao
+55,Mala de viagem rígida,Viagem,450,16,99,Unissex,Aniversário;Natal;Formatura,viagem
+56,Travesseiro de pescoço para viagem,Viagem,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem
+57,Kit de organizadores de bagagem,Viagem,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,viagem
+58,Garrafa térmica para trilhas,Viagem,95,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;esportes
+59,Mochila para notebook e viagem,Viagem,220,14,99,Unissex,Aniversário;Natal;Formatura,viagem;tecnologia
+60,Mapa-múndi de raspar,Viagem,110,14,99,Unissex,Aniversário;Natal;Amigo Secreto,viagem;decoracao
+61,Cama acolchoada para pets,Pets,130,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets
+62,Comedouro automático para pets,Pets,220,16,99,Unissex,Aniversário;Natal,pets;tecnologia
+63,Brinquedo interativo para cães,Pets,70,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets
+64,Coleira personalizada,Pets,60,12,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;artesanato
+65,Casinha decorativa para gatos,Pets,180,14,99,Unissex,Aniversário;Natal,pets;decoracao
+66,Kit de higiene para pets,Pets,90,14,99,Unissex,Aniversário;Amigo Secreto;Natal,pets;bem-estar
+67,Difusor de aromas com luz,Casa & Decoração,120,16,99,Unissex,Aniversário;Natal;Casamento,decoracao;bem-estar
+68,Conjunto de almofadas decorativas,Casa & Decoração,140,16,99,Unissex,Casamento;Natal;Chá de Bebê,decoracao
+69,Vaso decorativo de cerâmica,Casa & Decoração,100,16,99,Unissex,Casamento;Aniversário;Natal,decoracao;arte
+70,Kit de jardinagem para apartamento,Casa & Decoração,95,16,99,Unissex,Aniversário;Natal;Dia das Mães,jardinagem;decoracao
+71,Luminária de mesa minimalista,Casa & Decoração,160,16,99,Unissex,Aniversário;Casamento;Natal,decoracao;tecnologia
+72,Jogo de toalhas de banho,Casa & Decoração,130,16,99,Unissex,Casamento;Chá de Bebê;Natal,decoracao
