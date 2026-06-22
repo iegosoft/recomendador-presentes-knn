@@ -1,0 +1,69 @@
+import pytest
+
+from app import app as flask_app
+
+
+@pytest.fixture
+def cliente():
+    flask_app.testing = True
+    return flask_app.test_client()
+
+
+def test_pagina_inicial_renderiza_formulario(cliente):
+    resposta = cliente.get("/")
+    assert resposta.status_code == 200
+    assert b"form-recomendacao" in resposta.data
+
+
+def test_recomendar_caso_valido(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={
+            "idade": 28,
+            "genero": "Feminino",
+            "orcamento": 200,
+            "ocasiao": "Natal",
+            "interesses": ["leitura", "cafe"],
+        },
+    )
+    corpo = resposta.get_json()
+    assert resposta.status_code == 200
+    assert len(corpo["resultados"]) > 0
+
+
+def test_recomendar_sem_interesses_retorna_400(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": 28, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": []},
+    )
+    assert resposta.status_code == 400
+    assert "erro" in resposta.get_json()
+
+
+def test_recomendar_orcamento_baixo_sem_aviso_falso(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": 28, "genero": "Feminino", "orcamento": 1, "ocasiao": "Natal", "interesses": ["leitura"]},
+    )
+    corpo = resposta.get_json()
+    assert resposta.status_code == 200
+    assert corpo["resultados"] == []
+    assert "aviso" not in corpo
+
+
+def test_recomendar_idade_fora_de_qualquer_faixa(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": 200, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
+    )
+    corpo = resposta.get_json()
+    assert resposta.status_code == 200
+    assert corpo["resultados"] == []
+
+
+def test_recomendar_idade_invalida_retorna_400(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": -5, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
+    )
+    assert resposta.status_code == 400
