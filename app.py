@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 
-from recommender import GiftRecommender
+from recommender import OCASIAO_SEM_PREFERENCIA, OCASIOES_VOCABULARIO, TAGS_VOCABULARIO, GiftRecommender
 
 app = Flask(__name__)
 recomendador = GiftRecommender()
@@ -8,7 +8,12 @@ recomendador = GiftRecommender()
 
 @app.route("/")
 def index():
-    return "Recomendador de Presentes em construcao."
+    return render_template(
+        "index.html",
+        tags=TAGS_VOCABULARIO,
+        ocasioes=OCASIOES_VOCABULARIO,
+        ocasiao_sem_preferencia=OCASIAO_SEM_PREFERENCIA,
+    )
 
 
 @app.route("/api/recomendar", methods=["POST"])
