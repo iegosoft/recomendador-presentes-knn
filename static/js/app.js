@@ -73,14 +73,16 @@ function criarCardPresente(item) {
   const tags = item.tags.map((tag) => `<li>${tag}</li>`).join("");
   const temCompatibilidade =
     item.compatibilidade !== null && item.compatibilidade !== undefined;
-  const selo = temCompatibilidade
-    ? `<div class="selo-compatibilidade">${item.compatibilidade}%</div>`
+  const etiqueta = temCompatibilidade
+    ? `<span class="etiqueta-compatibilidade">${item.compatibilidade}% de afinidade</span>`
     : "";
 
   return `
     <article class="cartao-presente">
-      ${selo}
-      <p class="categoria">${item.categoria}</p>
+      <div class="cartao-cabecalho">
+        <p class="categoria">${item.categoria}</p>
+        ${etiqueta}
+      </div>
       <h3>${item.nome}</h3>
       <p class="preco">R$ ${item.preco.toFixed(2)}</p>
       <ul class="tags">${tags}</ul>
