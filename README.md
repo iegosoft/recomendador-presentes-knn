@@ -66,44 +66,48 @@ porque cabia no orçamento original.
 
 ### 2. Ranqueamento por cobertura do perfil (KNN + cosseno)
 
-Cada presente do catálogo é representado por um vetor multi-hot: uma
-posição para cada tag do vocabulário e uma posição para cada ocasião. O
-perfil informado no formulário é convertido para o mesmo formato de vetor
-a partir dos interesses e da ocasião escolhidos. Quando a ocasião
-escolhida é "Sem ocasião específica", a parte do vetor referente a
-ocasião fica zerada e só os interesses contam.
-
-As duas partes do vetor têm pesos diferentes: a parte de interesses pesa
-o dobro da parte de ocasião (`PESO_TAGS = 1.0` contra `PESO_OCASIAO =
-0.5` em `recommender.py`), porque o interesse é o sinal mais forte de que
-*tipo* de presente combina com a pessoa — a ocasião é só contexto
-adicional.
+Cada presente do catálogo é representado por um vetor multi-hot com uma
+posição para cada tag do vocabulário (a ocasião **não** entra nesse
+vetor — ver por quê mais abaixo). O perfil informado no formulário é
+convertido para o mesmo formato a partir dos interesses escolhidos.
 
 O `NearestNeighbors` do scikit-learn (`metric="cosine"`) busca, entre os
 itens já filtrados, um pool de candidatos bem maior do que o número de
 resultados exibidos (6x). Esse pool é só a busca inicial — a porcentagem
 de compatibilidade exibida **não** é a similaridade de cosseno simétrica.
-Cosseno padrão penaliza um item por ter características extras que o
-usuário nem pediu (um item com 10 tags compartilhando 2 com o perfil
-pontua pior do que um item com só essas 2 tags), o que deixava presentes
-genuinamente bons com porcentagens baixas e arbitrárias. Em vez disso, a
-compatibilidade exibida é a **cobertura do perfil**: que fração
-(ponderada pelos mesmos pesos de tags/ocasião) do que o usuário pediu
-aquele item realmente tem —
-`dot(perfil, item) / dot(perfil, perfil)`. Um item que tem todas as tags e
-a ocasião escolhidas marca 100%, independente de quantas outras
-características ele também tenha.
+Cosseno padrão (e qualquer métrica que penalize o item por ter
+características extras, como o coeficiente de Dice) faz um item com 10
+tags compartilhando 2 com o perfil pontuar pior do que um item com só
+essas 2 tags — o que deixava presentes genuinamente bons com porcentagens
+baixas e arbitrárias. Em vez disso, a compatibilidade exibida é a
+**cobertura do perfil**: que fração das tags escolhidas pelo usuário
+aquele item realmente tem — `dot(perfil, item) / dot(perfil, perfil)`. Um
+item que tem todas as tags escolhidas marca 100%, independente de quantas
+outras características ele também tenha.
+
+A ocasião conta como um **bônus** de 5 pontos (`BONUS_OCASIAO`) quando o
+item também serve para a ocasião escolhida, em vez de entrar no mesmo
+vetor dos interesses. Ela foi deliberadamente tirada do vetor principal:
+a maioria dos itens do catálogo serve para várias ocasiões ao mesmo
+tempo, e colocar isso no mesmo cálculo de cobertura/cosseno fazia esse
+"servir para várias ocasiões" ser tratado como característica extra
+irrelevante, inflando a base de comparação do item e empurrando a
+compatibilidade pra baixo de forma artificial — inclusive em casos
+simples de 1 ou 2 interesses, que deveriam pontuar alto sem dificuldade.
 
 ### 3. Piso mínimo de confiança
 
-Nenhuma recomendação é exibida com menos de 70% de cobertura do perfil
+Nenhuma recomendação é exibida com menos de 70% de compatibilidade
 (`MIN_COMPATIBILIDADE` em `recommender.py`). Itens abaixo disso são
 descartados antes mesmo de chegar à etapa de diversidade — o sistema
 prefere devolver uma lista menor (ou vazia, com o estado correspondente
 no front-end) a preencher os resultados com presentes de baixa relação
-com o que foi pedido só para completar a grade.
+com o que foi pedido só para completar a grade. Isso significa que pedir
+muitos interesses ao mesmo tempo reduz naturalmente o número de
+resultados: cobrir 2 de 3 interesses escolhidos é 66,7% de cobertura, que
+fica abaixo do piso — o sistema não finge uma confiança que não tem.
 
-### 5. Diversidade e desempate
+### 4. Diversidade e desempate
 
 Pegar só os itens mais parecidos do pool, sem mais nada, tende a devolver
 uma lista dominada por uma única categoria, porque itens da mesma
@@ -120,9 +124,11 @@ exatamente a mesma compatibilidade, o desempate é pela proximidade do
 preço ao orçamento informado. O resultado final é sempre reordenado por
 compatibilidade antes de ser devolvido.
 
-### 6. Fallback para perfil sem correspondência
+### 5. Fallback para perfil sem correspondência
 
-Se o vetor de perfil resultar todo zerado (nenhum interesse ou ocasião
-reconhecida no vocabulário), o sistema não tenta calcular cosseno — cai
-num fallback que ordena os itens filtrados pela proximidade ao orçamento
-informado, sem gerar erro.
+Se o vetor de perfil (interesses) resultar todo zerado, o sistema não
+tenta calcular cobertura — cai num fallback que ordena os itens filtrados
+pela proximidade ao orçamento informado, sem gerar erro. Na prática isso
+só acontece chamando `GiftRecommender.recomendar` diretamente com tags
+fora do vocabulário, já que a API valida os interesses antes de chegar
+aqui.
