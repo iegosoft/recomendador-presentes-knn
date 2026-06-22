@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recomendador de Presentes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topo">
+    <h1>Recomendador de Presentes</h1>
+    <p class="subtitulo">Conte sobre quem vai receber e a gente sugere o presente certo.</p>
+  </header>
+
+  <main>
+    <section class="cartao-etiqueta formulario-secao" aria-labelledby="form-titulo">
+      <h2 id="form-titulo">Perfil de quem vai receber</h2>
+      <form id="form-recomendacao" novalidate>
+        <div class="campo">
+          <label for="idade">Idade</label>
+          <input type="number" id="idade" name="idade" min="1" required>
+        </div>
+
+        <div class="campo">
+          <label for="genero">Gênero</label>
+          <select id="genero" name="genero" required>
+            <option value="Feminino">Feminino</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Unissex">Unissex</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="orcamento">Orçamento (R$)</label>
+          <input type="number" id="orcamento" name="orcamento" min="1" step="0.01" required>
+        </div>
+
+        <div class="campo">
+          <label for="ocasiao">Ocasião</label>
+          <select id="ocasiao" name="ocasiao" required>
+            {% for ocasiao in ocasioes %}
+            <option value="{{ ocasiao }}">{{ ocasiao }}</option>
+            {% endfor %}
+            <option value="{{ ocasiao_sem_preferencia }}">{{ ocasiao_sem_preferencia }}</option>
+          </select>
+        </div>
+
+        <fieldset class="campo campo-interesses">
+          <legend>Interesses (escolha pelo menos um)</legend>
+          <div class="chips">
+            {% for tag in tags %}
+            <label class="chip">
+              <input type="checkbox" name="interesses" value="{{ tag }}">
+              <span>{{ tag }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <p class="mensagem-erro" id="mensagem-erro" role="alert" hidden></p>
+
+        <button type="submit" class="botao-principal">Recomendar presentes</button>
+      </form>
+    </section>
+
+    <section class="resultados-secao" aria-live="polite">
+      <h2 class="resultados-titulo" id="resultados-titulo" hidden>Sugestões para você</h2>
+      <p class="aviso-orcamento" id="aviso-orcamento" hidden></p>
+      <p class="estado-vazio" id="estado-vazio" hidden>
+        Nenhum presente encontrado com esses filtros. Tente ajustar o orçamento ou os interesses.
+      </p>
+      <div class="grid-resultados" id="grid-resultados"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
