@@ -10,3 +10,6 @@ instance/
 *.egg-info/
 .vscode/
 .idea/
+*.log
+.coverage
+htmlcov/
