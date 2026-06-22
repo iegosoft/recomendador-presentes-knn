@@ -31,6 +31,9 @@ MULTIPLICADOR_POOL = 6
 # limite de itens da mesma categoria entre os resultados finais
 MAX_ITENS_POR_CATEGORIA = 2
 
+# nenhuma recomendacao e exibida com menos do que isso de compatibilidade
+MIN_COMPATIBILIDADE = 70.0
+
 
 class GiftRecommender:
     def __init__(self, caminho_csv="data/presentes.csv"):
@@ -76,38 +79,69 @@ class GiftRecommender:
         return filtrado, tolerancia_usada
 
     def recomendar(self, idade, genero, orcamento, ocasiao, interesses, top_n=6):
-        candidatos = self._filtrar_por_idade_e_genero(idade, genero)
-        candidatos, tolerancia_usada = self._filtrar_por_orcamento(candidatos, orcamento)
-
-        if candidatos.empty:
+        elegiveis = self._filtrar_por_idade_e_genero(idade, genero)
+        if elegiveis.empty:
             return [], False
 
         ocasioes_perfil = [ocasiao] if ocasiao else []
         perfil = np.array(self._vetorizar(interesses, ocasioes_perfil), dtype=float)
 
         if not perfil.any():
+            candidatos, tolerancia_usada = self._filtrar_por_orcamento(elegiveis, orcamento)
+            if candidatos.empty:
+                return [], False
             resultados = self._recomendar_por_orcamento(candidatos, orcamento, top_n)
             return resultados, tolerancia_usada > 0
 
+        # a tolerancia de orcamento so avanca se a faixa de preco atual nao
+        # tiver nenhum item com compatibilidade aceitavel - e nao apenas "algum
+        # item qualquer dentro do preco", que e o que fazia o sistema parar de
+        # ampliar a busca cedo demais e devolver presentes sem relacao com os
+        # interesses so porque cabiam no orcamento original.
+        norma_perfil_ao_quadrado = float(np.dot(perfil, perfil))
+        pool = []
+        tolerancia_usada = 0.0
+        for tolerancia in TOLERANCIAS_ORCAMENTO:
+            tolerancia_usada = tolerancia
+            limite = orcamento * (1 + tolerancia)
+            candidatos = elegiveis[elegiveis["preco"] <= limite]
+            if candidatos.empty:
+                continue
+            pool = self._pool_compativel(candidatos, perfil, norma_perfil_ao_quadrado, orcamento, top_n)
+            if pool:
+                break
+
+        if not pool:
+            return [], False
+
+        pool = self._remover_variantes_duplicadas(pool)
+        resultados = self._selecionar_com_diversidade(pool, top_n)
+        return resultados, tolerancia_usada > 0
+
+    def _pool_compativel(self, candidatos, perfil, norma_perfil_ao_quadrado, orcamento, top_n):
         indices = candidatos.index.to_numpy()
         matriz_candidatos = self._matriz_itens[indices]
 
+        # NearestNeighbors com cosseno faz a busca inicial dos mais parecidos;
+        # o cosseno simetrico penaliza um item por ter caracteristicas extras
+        # que o usuario nem pediu, o que deixava a % de compatibilidade baixa
+        # mesmo quando o item cobria tudo o que foi escolhido. Por isso a
+        # compatibilidade exibida e recalculada como cobertura do perfil: que
+        # fracao (ponderada) do que o usuario pediu esse item realmente tem.
         tamanho_pool = min(len(candidatos), top_n * MULTIPLICADOR_POOL)
         modelo = NearestNeighbors(metric="cosine", n_neighbors=tamanho_pool)
         modelo.fit(matriz_candidatos)
-        distancias, posicoes = modelo.kneighbors([perfil])
+        _, posicoes = modelo.kneighbors([perfil])
 
-        pool = [
-            self._formatar_item(
-                candidatos.iloc[posicao], round((1 - float(distancia)) * 100, 1)
-            )
-            for distancia, posicao in zip(distancias[0], posicoes[0])
-        ]
+        pool = []
+        for posicao in posicoes[0]:
+            cobertura = float(np.dot(matriz_candidatos[posicao], perfil)) / norma_perfil_ao_quadrado
+            compatibilidade = round(min(cobertura, 1.0) * 100, 1)
+            if compatibilidade >= MIN_COMPATIBILIDADE:
+                pool.append(self._formatar_item(candidatos.iloc[posicao], compatibilidade))
+
         pool.sort(key=lambda item: (-item["compatibilidade"], abs(item["preco"] - orcamento)))
-        pool = self._remover_variantes_duplicadas(pool)
-
-        resultados = self._selecionar_com_diversidade(pool, top_n)
-        return resultados, tolerancia_usada > 0
+        return pool
 
     @staticmethod
     def _remover_variantes_duplicadas(pool_ordenado):
@@ -127,9 +161,8 @@ class GiftRecommender:
     @staticmethod
     def _selecionar_com_diversidade(pool_ordenado, top_n):
         limite = MAX_ITENS_POR_CATEGORIA
-        selecionados = []
 
-        while len(selecionados) < top_n and limite <= len(pool_ordenado):
+        while True:
             selecionados = []
             contagem_por_categoria = {}
             for item in pool_ordenado:
@@ -139,6 +172,9 @@ class GiftRecommender:
                 if usados < limite:
                     selecionados.append(item)
                     contagem_por_categoria[item["categoria"]] = usados + 1
+
+            if len(selecionados) >= top_n or limite >= len(pool_ordenado):
+                break
             limite += 1
 
         selecionados.sort(key=lambda item: -item["compatibilidade"])

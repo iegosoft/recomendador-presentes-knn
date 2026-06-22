@@ -52,9 +52,12 @@ def test_recomendar_orcamento_baixo_sem_aviso_falso(cliente):
 
 
 def test_recomendar_idade_fora_de_qualquer_faixa(cliente):
+    # 105 e uma idade valida (dentro do limite de 1-120 aceito pela API), mas
+    # nenhum item do catalogo tem idade_max tao alta - deve devolver lista
+    # vazia, sem erro.
     resposta = cliente.post(
         "/api/recomendar",
-        json={"idade": 200, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
+        json={"idade": 105, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
     )
     corpo = resposta.get_json()
     assert resposta.status_code == 200
@@ -65,5 +68,35 @@ def test_recomendar_idade_invalida_retorna_400(cliente):
     resposta = cliente.post(
         "/api/recomendar",
         json={"idade": -5, "genero": "Feminino", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
+    )
+    assert resposta.status_code == 400
+
+
+def test_recomendar_genero_invalido_retorna_400(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": 28, "genero": "Outro", "orcamento": 200, "ocasiao": "Natal", "interesses": ["leitura"]},
+    )
+    assert resposta.status_code == 400
+
+
+def test_recomendar_ocasiao_invalida_retorna_400(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={"idade": 28, "genero": "Feminino", "orcamento": 200, "ocasiao": "Reveillon", "interesses": ["leitura"]},
+    )
+    assert resposta.status_code == 400
+
+
+def test_recomendar_interesse_invalido_retorna_400(cliente):
+    resposta = cliente.post(
+        "/api/recomendar",
+        json={
+            "idade": 28,
+            "genero": "Feminino",
+            "orcamento": 200,
+            "ocasiao": "Natal",
+            "interesses": ["interesse-que-nao-existe"],
+        },
     )
     assert resposta.status_code == 400

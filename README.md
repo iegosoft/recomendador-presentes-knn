@@ -56,12 +56,15 @@ que:
 - cabem no orçamento.
 
 O filtro de orçamento usa uma tolerância progressiva: tenta primeiro sem
-margem nenhuma, depois com 15% e por fim com 30% de margem, parando na
-primeira faixa que devolve uma quantidade razoável de itens. Isso evita
-tanto recomendar algo fora do orçamento sem necessidade quanto devolver
-uma lista vazia quando só faltavam alguns reais para encaixar um item bom.
+margem nenhuma, depois com 15% e por fim com 30% de margem. A tolerância
+só avança se a faixa de preço atual não tiver **nenhum item com
+compatibilidade aceitável** (ver seção 3) — não basta existir algum item
+qualquer dentro do preço. Essa distinção importa: a versão antiga parava
+de ampliar a busca assim que encontrava 3 itens baratos de qualquer tipo,
+e podia acabar recomendando algo sem nenhuma relação com os interesses só
+porque cabia no orçamento original.
 
-### 2. Ranqueamento por similaridade de cosseno (KNN)
+### 2. Ranqueamento por cobertura do perfil (KNN + cosseno)
 
 Cada presente do catálogo é representado por um vetor multi-hot: uma
 posição para cada tag do vocabulário e uma posição para cada ocasião. O
@@ -76,36 +79,48 @@ o dobro da parte de ocasião (`PESO_TAGS = 1.0` contra `PESO_OCASIAO =
 *tipo* de presente combina com a pessoa — a ocasião é só contexto
 adicional.
 
-Com os itens já filtrados e vetorizados, o `NearestNeighbors` do
-scikit-learn (`metric="cosine"`) busca um pool de candidatos bem maior do
-que o número de resultados exibidos (4x), e a distância de cosseno de
-cada um é convertida em porcentagem de compatibilidade
-(`(1 - distância) * 100`).
+O `NearestNeighbors` do scikit-learn (`metric="cosine"`) busca, entre os
+itens já filtrados, um pool de candidatos bem maior do que o número de
+resultados exibidos (6x). Esse pool é só a busca inicial — a porcentagem
+de compatibilidade exibida **não** é a similaridade de cosseno simétrica.
+Cosseno padrão penaliza um item por ter características extras que o
+usuário nem pediu (um item com 10 tags compartilhando 2 com o perfil
+pontua pior do que um item com só essas 2 tags), o que deixava presentes
+genuinamente bons com porcentagens baixas e arbitrárias. Em vez disso, a
+compatibilidade exibida é a **cobertura do perfil**: que fração
+(ponderada pelos mesmos pesos de tags/ocasião) do que o usuário pediu
+aquele item realmente tem —
+`dot(perfil, item) / dot(perfil, perfil)`. Um item que tem todas as tags e
+a ocasião escolhidas marca 100%, independente de quantas outras
+características ele também tenha.
 
-**Por que cosseno e não distância euclidiana:** os vetores aqui são
-multi-hot e esparsos — o que importa é a *proporção* de características em
-comum, não o quão "longe" os pontos estão em valor absoluto. Dois
-presentes com 2 tags em comum entre 3 tags cada são muito mais parecidos
-entre si do que um presente com 2 tags e outro com 10 tags que também
-compartilham 2 — mas a distância euclidiana penalizaria esse segundo caso
-pelo simples fato de o vetor ser "maior". Cosseno mede o ângulo entre os
-vetores, ignorando magnitude, o que é exatamente a noção de similaridade
-que faz sentido para conjuntos de características como tags e ocasiões.
+### 3. Piso mínimo de confiança
 
-### 3. Diversidade e desempate
+Nenhuma recomendação é exibida com menos de 70% de cobertura do perfil
+(`MIN_COMPATIBILIDADE` em `recommender.py`). Itens abaixo disso são
+descartados antes mesmo de chegar à etapa de diversidade — o sistema
+prefere devolver uma lista menor (ou vazia, com o estado correspondente
+no front-end) a preencher os resultados com presentes de baixa relação
+com o que foi pedido só para completar a grade.
 
-Pegar só os 6 itens mais parecidos do pool, sem mais nada, tende a
-devolver uma lista dominada por uma única categoria (ex: 4 livros em 6
-resultados), porque itens da mesma categoria tendem a compartilhar tags.
-Por isso, antes de cortar para os itens exibidos, o pool maior passa por
-uma seleção que limita em 2 o número de itens por categoria
-(`MAX_ITENS_POR_CATEGORIA`), preenchendo o restante das vagas com os
-próximos melhores de outras categorias. Quando duas opções têm exatamente
-a mesma compatibilidade, o desempate é pela proximidade do preço ao
-orçamento informado. O resultado final é sempre reordenado por
+### 5. Diversidade e desempate
+
+Pegar só os itens mais parecidos do pool, sem mais nada, tende a devolver
+uma lista dominada por uma única categoria, porque itens da mesma
+categoria tendem a compartilhar tags — e o catálogo tem várias variantes
+de preço do mesmo produto-base com tags idênticas, que empatam
+perfeitamente em compatibilidade entre si. Por isso, antes da seleção
+final: variantes do mesmo produto-base (mesma categoria e mesmas tags) são
+reduzidas a uma só, mantendo a mais próxima do orçamento; depois, a
+seleção limita em 2 o número de itens por categoria
+(`MAX_ITENS_POR_CATEGORIA`), relaxando esse limite progressivamente só se
+não houver itens suficientes de outras categorias para preencher a lista
+(em vez de descartar o limite por completo). Quando duas opções têm
+exatamente a mesma compatibilidade, o desempate é pela proximidade do
+preço ao orçamento informado. O resultado final é sempre reordenado por
 compatibilidade antes de ser devolvido.
 
-### 4. Fallback para perfil sem correspondência
+### 6. Fallback para perfil sem correspondência
 
 Se o vetor de perfil resultar todo zerado (nenhum interesse ou ocasião
 reconhecida no vocabulário), o sistema não tenta calcular cosseno — cai

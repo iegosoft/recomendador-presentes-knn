@@ -1,6 +1,6 @@
 import pytest
 
-from recommender import OCASIAO_SEM_PREFERENCIA, GiftRecommender
+from recommender import MIN_COMPATIBILIDADE, OCASIAO_SEM_PREFERENCIA, GiftRecommender
 
 
 @pytest.fixture(scope="module")
@@ -87,6 +87,35 @@ def test_remove_variantes_de_preco_do_mesmo_produto_do_pool(recomendador):
     )
     nomes_base = [item["nome"].split(" – ")[0] for item in resultados]
     assert len(nomes_base) == len(set(nomes_base))
+
+
+def test_nenhuma_recomendacao_fica_abaixo_do_piso_de_compatibilidade(recomendador):
+    resultados, _ = recomendador.recomendar(
+        idade=28,
+        genero="Feminino",
+        orcamento=200,
+        ocasiao="Natal",
+        interesses=["leitura", "cafe"],
+    )
+    assert len(resultados) > 0
+    assert all(item["compatibilidade"] >= MIN_COMPATIBILIDADE for item in resultados)
+
+
+def test_sem_correspondencia_confiavel_devolve_lista_vazia_em_vez_de_lixo(recomendador):
+    # idade 15 com orcamento de R$ 50 nao tem nenhum item de tecnologia ou
+    # esportes que caiba no orcamento (o mais barato do catalogo custa mais
+    # que isso mesmo com a tolerancia maxima); o sistema deve admitir que nao
+    # tem um presente confiavel em vez de sugerir algo sem relacao com os
+    # interesses so para preencher a lista.
+    resultados, orcamento_ampliado = recomendador.recomendar(
+        idade=15,
+        genero="Masculino",
+        orcamento=50,
+        ocasiao="Natal",
+        interesses=["tecnologia", "esportes"],
+    )
+    assert resultados == []
+    assert orcamento_ampliado is False
 
 
 def test_tipos_dos_resultados_sao_nativos(recomendador):
