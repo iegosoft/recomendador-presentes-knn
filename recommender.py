@@ -158,12 +158,31 @@ class GiftRecommender:
     ) -> list[Resultado]:
         """Busca candidatos parecidos via KNN e calcula a compatibilidade exibida.
 
-        A compatibilidade exibida e a cobertura do perfil: que fracao das
-        tags escolhidas pelo usuario aquele item realmente tem (overlap /
-        norma_perfil). Isso responde a pergunta que importa pro usuario - "o
-        presente tem o que eu pedi?" - sem penalizar um item por ter
-        caracteristicas extras que ele nem pediu. Um item que cobre todas as
-        tags escolhidas marca 100%, mesmo que tambem sirva pra outras coisas.
+        A compatibilidade exibida e o coeficiente de sobreposicao (overlap
+        coefficient / Szymkiewicz-Simpson) entre o conjunto de tags do
+        perfil e o conjunto de tags do item: `overlap / min(|perfil|,
+        |item|)`. Ele resolve um problema que as alternativas mais simples
+        nao resolviam ao mesmo tempo:
+
+        - cosseno simetrico penaliza um item por ter tags extras que o
+          usuario nem pediu (um item com 10 tags compartilhando 2 com o
+          perfil pontua pior que um item com so essas 2 tags) - ruim mesmo
+          pra perfis pequenos.
+        - cobertura pura (overlap / |perfil|) resolve isso, mas faz o
+          contrario: quanto mais interesses o usuario marca, mais dificil
+          fica qualquer item pontuar bem, porque o denominador cresce com o
+          numero de interesses escolhidos. Cobrir 2 de 5 interesses
+          escolhidos vira so 40%, mesmo que esse item seja um presente
+          perfeito pra esses 2 interesses especificos. Era esse o motivo de
+          a busca devolver lista vazia quando o usuario marcava interesses
+          de categorias muito diferentes entre si - nenhum produto cobre
+          5 categorias ao mesmo tempo, e nao deveria precisar cobrir.
+        - dividir pelo *menor* dos dois conjuntos resolve os dois problemas
+          juntos: um item pequeno e focado que bate 100% com 2 dos seus
+          interesses marca 100% (porque ele esgota a propria capacidade
+          nesses 2), independente de quantos outros interesses voce tambem
+          marcou. E um item com tags extras irrelevantes ainda marca 100%
+          quando cobre tudo que o perfil pede.
 
         A ocasiao fica de fora desse calculo principal (que e so sobre
         interesses) e entra como um bonus simples: a maioria dos itens do
@@ -185,10 +204,12 @@ class GiftRecommender:
         for posicao in posicoes[0]:
             vetor_item = matriz_candidatos[posicao]
             sobreposicao = float(np.dot(vetor_item, perfil_tags))
-            cobertura = sobreposicao / norma_perfil_ao_quadrado
+            norma_item_ao_quadrado = float(np.dot(vetor_item, vetor_item))
+            menor_conjunto = min(norma_perfil_ao_quadrado, norma_item_ao_quadrado)
+            indice_sobreposicao = sobreposicao / menor_conjunto if menor_conjunto > 0 else 0.0
 
             bonus = BONUS_OCASIAO if usa_ocasiao and ocasiao in ocasioes_lista[posicao] else 0.0
-            compatibilidade = round(min(cobertura * 100 + bonus, 100.0), 1)
+            compatibilidade = round(min(indice_sobreposicao * 100 + bonus, 100.0), 1)
 
             if compatibilidade >= MIN_COMPATIBILIDADE:
                 pool.append(self._formatar_item(candidatos.iloc[posicao], compatibilidade))

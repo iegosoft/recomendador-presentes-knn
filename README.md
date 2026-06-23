@@ -96,7 +96,7 @@ de ampliar a busca assim que encontrava 3 itens baratos de qualquer tipo,
 e podia acabar recomendando algo sem nenhuma relação com os interesses só
 porque cabia no orçamento original.
 
-### 2. Ranqueamento por cobertura do perfil (KNN + cosseno)
+### 2. Ranqueamento por coeficiente de sobreposição (KNN + cosseno)
 
 Cada presente do catálogo é representado por um vetor multi-hot com uma
 posição para cada tag do vocabulário (a ocasião **não** entra nesse
@@ -105,27 +105,42 @@ convertido para o mesmo formato a partir dos interesses escolhidos.
 
 O `NearestNeighbors` do scikit-learn (`metric="cosine"`) busca, entre os
 itens já filtrados, um pool de candidatos bem maior do que o número de
-resultados exibidos (6x). Esse pool é só a busca inicial — a porcentagem
-de compatibilidade exibida **não** é a similaridade de cosseno simétrica.
-Cosseno padrão (e qualquer métrica que penalize o item por ter
-características extras, como o coeficiente de Dice) faz um item com 10
-tags compartilhando 2 com o perfil pontuar pior do que um item com só
-essas 2 tags — o que deixava presentes genuinamente bons com porcentagens
-baixas e arbitrárias. Em vez disso, a compatibilidade exibida é a
-**cobertura do perfil**: que fração das tags escolhidas pelo usuário
-aquele item realmente tem — `dot(perfil, item) / dot(perfil, perfil)`. Um
-item que tem todas as tags escolhidas marca 100%, independente de quantas
-outras características ele também tenha.
+resultados exibidos (20x — precisa ser grande porque o catálogo tem
+várias variantes de preço/estilo com tags idênticas). Esse pool é só a
+busca inicial — a porcentagem de compatibilidade exibida **não** é a
+similaridade de cosseno simétrica nem a cobertura simples do perfil. O
+projeto passou por três formulações até chegar na atual, e vale registrar
+o porquê de cada uma não ser suficiente:
+
+1. **Cosseno simétrico** penaliza um item por ter características extras
+   que o usuário nem pediu (um item com 10 tags compartilhando 2 com o
+   perfil pontua pior que um item com só essas 2 tags) — presentes
+   genuinamente bons saíam com porcentagens baixas e arbitrárias.
+2. **Cobertura do perfil** (`overlap / |perfil|`) resolve o problema 1,
+   mas cria outro: quanto mais interesses o usuário marca, maior fica o
+   denominador, e mais difícil qualquer item pontuar bem. Cobrir 2 de 5
+   interesses escolhidos virava só 40%, mesmo que o item fosse perfeito
+   pra esses 2 especificamente — era esse o motivo de a busca devolver
+   lista vazia quando os interesses marcados eram de categorias muito
+   diferentes entre si (nenhum presente cobre 5 categorias ao mesmo
+   tempo, e não deveria precisar cobrir).
+3. **Coeficiente de sobreposição** (*overlap coefficient* / Szymkiewicz–
+   Simpson), a versão atual: `overlap / min(|perfil|, |item|)`. Dividir
+   pelo *menor* dos dois conjuntos resolve os dois problemas ao mesmo
+   tempo — um item pequeno e focado que bate 100% com 2 dos interesses
+   marca 100%, porque ele esgota a própria capacidade nesses 2,
+   **independente de quantos outros interesses o usuário também tenha
+   marcado**. E um item com tags extras irrelevantes ainda marca 100%
+   quando cobre tudo que o perfil pede.
 
 A ocasião conta como um **bônus** de 5 pontos (`BONUS_OCASIAO`) quando o
 item também serve para a ocasião escolhida, em vez de entrar no mesmo
 vetor dos interesses. Ela foi deliberadamente tirada do vetor principal:
 a maioria dos itens do catálogo serve para várias ocasiões ao mesmo
-tempo, e colocar isso no mesmo cálculo de cobertura/cosseno fazia esse
-"servir para várias ocasiões" ser tratado como característica extra
-irrelevante, inflando a base de comparação do item e empurrando a
-compatibilidade pra baixo de forma artificial — inclusive em casos
-simples de 1 ou 2 interesses, que deveriam pontuar alto sem dificuldade.
+tempo, e colocar isso no mesmo cálculo fazia esse "servir para várias
+ocasiões" ser tratado como característica extra irrelevante, inflando a
+base de comparação do item e empurrando a compatibilidade pra baixo de
+forma artificial.
 
 ### 3. Piso mínimo de confiança
 
@@ -134,10 +149,13 @@ Nenhuma recomendação é exibida com menos de 58% de compatibilidade
 descartados antes mesmo de chegar à etapa de diversidade — o sistema
 prefere devolver uma lista menor (ou vazia, com o estado correspondente
 no front-end) a preencher os resultados com presentes de baixa relação
-com o que foi pedido só para completar a grade. O valor foi calibrado pra
-não ficar rigoroso demais: cobrir 2 de 3 interesses escolhidos já dá 66,7%
-de cobertura e passa do piso, mas cobrir só 1 de 3 (33,3%) ainda fica de
-fora — o sistema não finge uma confiança que não tem.
+com o que foi pedido só para completar a grade. Como a compatibilidade
+agora é o coeficiente de sobreposição (e não mais a cobertura simples),
+esse piso deixa de penalizar quem marca vários interesses de categorias
+diferentes — basta que o item bata bem com *pelo menos um* deles. O que
+ainda fica de fora são correspondências fracas mesmo dentro de um único
+interesse (um item que só compartilha uma tag secundária, por exemplo) —
+o sistema não finge uma confiança que não tem.
 
 ### 4. Diversidade e desempate
 
