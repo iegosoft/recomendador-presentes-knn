@@ -83,13 +83,13 @@ SEEDS = [
 ]
 
 VARIACOES = [
-    ("Linha Essencial", 0.75),
-    ("Versão Compacta", 0.90),
+    ("Linha Básica", 0.50),
+    ("Linha Essencial", 0.65),
+    ("Versão Compacta", 0.80),
     ("Edição Padrão", 1.00),
-    ("Linha Premium", 1.30),
-    ("Versão Pro", 1.60),
-    ("Edição Limitada", 1.90),
-    ("Linha Colecionador", 2.30),
+    ("Linha Premium", 1.20),
+    ("Versão Pro", 1.40),
+    ("Edição Limitada", 1.65),
 ]
 
 
