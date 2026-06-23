@@ -129,15 +129,15 @@ simples de 1 ou 2 interesses, que deveriam pontuar alto sem dificuldade.
 
 ### 3. Piso mínimo de confiança
 
-Nenhuma recomendação é exibida com menos de 70% de compatibilidade
+Nenhuma recomendação é exibida com menos de 58% de compatibilidade
 (`MIN_COMPATIBILIDADE` em `recommender.py`). Itens abaixo disso são
 descartados antes mesmo de chegar à etapa de diversidade — o sistema
 prefere devolver uma lista menor (ou vazia, com o estado correspondente
 no front-end) a preencher os resultados com presentes de baixa relação
-com o que foi pedido só para completar a grade. Isso significa que pedir
-muitos interesses ao mesmo tempo reduz naturalmente o número de
-resultados: cobrir 2 de 3 interesses escolhidos é 66,7% de cobertura, que
-fica abaixo do piso — o sistema não finge uma confiança que não tem.
+com o que foi pedido só para completar a grade. O valor foi calibrado pra
+não ficar rigoroso demais: cobrir 2 de 3 interesses escolhidos já dá 66,7%
+de cobertura e passa do piso, mas cobrir só 1 de 3 (33,3%) ainda fica de
+fora — o sistema não finge uma confiança que não tem.
 
 ### 4. Diversidade e desempate
 
