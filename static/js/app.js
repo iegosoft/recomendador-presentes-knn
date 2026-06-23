@@ -69,6 +69,21 @@ function renderizarResultados(corpo) {
   gridResultados.innerHTML = resultados.map(criarCardPresente).join("");
 }
 
+const VISUAL_POR_CATEGORIA = {
+  "Tecnologia": { emoji: "💻", cores: ["#6c2bd9", "#9b6cf2"] },
+  "Livros": { emoji: "📚", cores: ["#1d6fa5", "#5fb3e0"] },
+  "Moda": { emoji: "👗", cores: ["#d9266c", "#f06ba0"] },
+  "Beleza & Bem-estar": { emoji: "💆", cores: ["#e0a02b", "#f5cd6b"] },
+  "Esportes & Fitness": { emoji: "🏋️", cores: ["#1f9d6c", "#5fd99b"] },
+  "Jogos": { emoji: "🎮", cores: ["#7c3aed", "#b794f6"] },
+  "Culinária": { emoji: "🍳", cores: ["#d9601f", "#f5a35e"] },
+  "Música": { emoji: "🎵", cores: ["#c0265a", "#ef6f9c"] },
+  "Arte & Artesanato": { emoji: "🎨", cores: ["#1d8a99", "#5fcdde"] },
+  "Viagem": { emoji: "✈️", cores: ["#2563eb", "#7ba6f7"] },
+  "Pets": { emoji: "🐾", cores: ["#a0522d", "#d29b6e"] },
+  "Casa & Decoração": { emoji: "🏠", cores: ["#5a3ea1", "#9b85d6"] },
+};
+
 function criarCardPresente(item) {
   const tags = item.tags.map((tag) => `<li>${tag}</li>`).join("");
   const temCompatibilidade =
@@ -77,15 +92,21 @@ function criarCardPresente(item) {
     ? `<span class="etiqueta-compatibilidade">${item.compatibilidade}% de afinidade</span>`
     : "";
 
+  const visual = VISUAL_POR_CATEGORIA[item.categoria] || { emoji: "🎁", cores: ["#6c2bd9", "#9b6cf2"] };
+  const fundoCapa = `linear-gradient(135deg, ${visual.cores[0]}, ${visual.cores[1]})`;
+
   return `
     <article class="cartao-presente">
-      <div class="cartao-cabecalho">
-        <p class="categoria">${item.categoria}</p>
+      <div class="cartao-capa" style="background: ${fundoCapa}">
+        ${visual.emoji}
         ${etiqueta}
       </div>
-      <h3>${item.nome}</h3>
-      <p class="preco">R$ ${item.preco.toFixed(2)}</p>
-      <ul class="tags">${tags}</ul>
+      <div class="cartao-corpo">
+        <p class="categoria">${item.categoria}</p>
+        <h3>${item.nome}</h3>
+        <p class="preco">R$ ${item.preco.toFixed(2)}</p>
+        <ul class="tags">${tags}</ul>
+      </div>
     </article>
   `;
 }
