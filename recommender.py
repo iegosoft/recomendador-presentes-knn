@@ -39,7 +39,7 @@ MULTIPLICADOR_POOL = 6
 MAX_ITENS_POR_CATEGORIA = 2
 
 # nenhuma recomendacao e exibida com menos do que isso de compatibilidade
-MIN_COMPATIBILIDADE = 70.0
+MIN_COMPATIBILIDADE = 58.0
 
 # bonus de compatibilidade quando o item tambem serve pra ocasiao escolhida -
 # a ocasiao e so contexto adicional, por isso conta como bonus e nao como
