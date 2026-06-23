@@ -1,6 +1,17 @@
+"""Motor de recomendacao de presentes baseado em conteudo (KNN + cosseno).
+
+Ver o README do projeto para a explicacao completa do algoritmo: filtros
+rigidos de idade/genero/orcamento, cobertura do perfil como metrica de
+compatibilidade, piso minimo de confianca e diversidade entre categorias.
+"""
+
+from typing import Any, Optional
+
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
+
+Resultado = dict[str, Any]
 
 TAGS_VOCABULARIO = [
     "tecnologia", "fitness", "viagem", "musica", "fotografia", "arte",
@@ -37,7 +48,9 @@ BONUS_OCASIAO = 5.0
 
 
 class GiftRecommender:
-    def __init__(self, caminho_csv="data/presentes.csv"):
+    """Recomenda presentes do catalogo a partir de um perfil informado."""
+
+    def __init__(self, caminho_csv: str = "data/presentes.csv") -> None:
         self.df = pd.read_csv(caminho_csv)
         self.df["tags_lista"] = self.df["tags"].apply(self._dividir_multivalorado)
         self.df["ocasioes_lista"] = self.df["ocasiao"].apply(self._dividir_multivalorado)
@@ -47,21 +60,25 @@ class GiftRecommender:
         )
 
     @staticmethod
-    def _dividir_multivalorado(valor):
+    def _dividir_multivalorado(valor: Any) -> list[str]:
+        """Quebra um campo do CSV separado por ';' em uma lista de strings."""
         if pd.isna(valor):
             return []
         return [parte.strip() for parte in str(valor).split(";") if parte.strip()]
 
     @staticmethod
-    def _vetorizar_tags(tags):
+    def _vetorizar_tags(tags: list[str]) -> list[float]:
+        """Converte uma lista de tags num vetor multi-hot na ordem de TAGS_VOCABULARIO."""
         return [1.0 if tag in tags else 0.0 for tag in TAGS_VOCABULARIO]
 
-    def _filtrar_por_idade_e_genero(self, idade, genero):
+    def _filtrar_por_idade_e_genero(self, idade: float, genero: str) -> pd.DataFrame:
         mascara_idade = (self.df["idade_min"] <= idade) & (self.df["idade_max"] >= idade)
         mascara_genero = (self.df["genero"] == "Unissex") | (self.df["genero"] == genero)
         return self.df[mascara_idade & mascara_genero]
 
-    def _filtrar_por_orcamento(self, candidatos, orcamento):
+    def _filtrar_por_orcamento(
+        self, candidatos: pd.DataFrame, orcamento: float
+    ) -> tuple[pd.DataFrame, float]:
         filtrado = candidatos
         tolerancia_usada = 0.0
         for tolerancia in TOLERANCIAS_ORCAMENTO:
@@ -72,7 +89,22 @@ class GiftRecommender:
                 break
         return filtrado, tolerancia_usada
 
-    def recomendar(self, idade, genero, orcamento, ocasiao, interesses, top_n=6):
+    def recomendar(
+        self,
+        idade: float,
+        genero: str,
+        orcamento: float,
+        ocasiao: str,
+        interesses: list[str],
+        top_n: int = 6,
+    ) -> tuple[list[Resultado], bool]:
+        """Recomenda até `top_n` presentes para o perfil informado.
+
+        Retorna uma tupla `(resultados, orcamento_ampliado)`. `resultados` é
+        uma lista de dicts (possivelmente vazia, quando nada atinge o piso de
+        confiança) e `orcamento_ampliado` indica se foi preciso usar uma
+        tolerância de orçamento maior que 0% para achar algo confiável.
+        """
         elegiveis = self._filtrar_por_idade_e_genero(idade, genero)
         if elegiveis.empty:
             return [], False
@@ -92,7 +124,7 @@ class GiftRecommender:
         # ampliar a busca cedo demais e devolver presentes sem relacao com os
         # interesses so porque cabiam no orcamento original.
         norma_perfil_ao_quadrado = float(np.dot(perfil_tags, perfil_tags))
-        pool = []
+        pool: list[Resultado] = []
         tolerancia_usada = 0.0
         for tolerancia in TOLERANCIAS_ORCAMENTO:
             tolerancia_usada = tolerancia
@@ -111,23 +143,32 @@ class GiftRecommender:
         resultados = self._selecionar_com_diversidade(pool, top_n)
         return resultados, tolerancia_usada > 0
 
-    def _pool_compativel(self, candidatos, perfil_tags, norma_perfil_ao_quadrado, ocasiao, orcamento, top_n):
+    def _pool_compativel(
+        self,
+        candidatos: pd.DataFrame,
+        perfil_tags: np.ndarray,
+        norma_perfil_ao_quadrado: float,
+        ocasiao: str,
+        orcamento: float,
+        top_n: int,
+    ) -> list[Resultado]:
+        """Busca candidatos parecidos via KNN e calcula a compatibilidade exibida.
+
+        A compatibilidade exibida e a cobertura do perfil: que fracao das
+        tags escolhidas pelo usuario aquele item realmente tem (overlap /
+        norma_perfil). Isso responde a pergunta que importa pro usuario - "o
+        presente tem o que eu pedi?" - sem penalizar um item por ter
+        caracteristicas extras que ele nem pediu. Um item que cobre todas as
+        tags escolhidas marca 100%, mesmo que tambem sirva pra outras coisas.
+
+        A ocasiao fica de fora desse calculo principal (que e so sobre
+        interesses) e entra como um bonus simples: a maioria dos itens do
+        catalogo serve para varias ocasioes ao mesmo tempo, e isso nao deve
+        ser tratado como "tag extra irrelevante" que penaliza o item.
+        """
         indices = candidatos.index.to_numpy()
         matriz_candidatos = self._matriz_tags[indices]
 
-        # NearestNeighbors com cosseno faz a busca inicial dos mais parecidos.
-        # A compatibilidade exibida, porem, e a cobertura do perfil: que
-        # fracao das tags escolhidas pelo usuario esse item realmente tem
-        # (overlap / norma_perfil). Isso responde a pergunta que importa pro
-        # usuario - "o presente tem o que eu pedi?" - sem penalizar um item
-        # por ter caracteristicas extras que ele nem pediu. Um item que cobre
-        # todas as tags escolhidas marca 100%, mesmo que tambem sirva pra
-        # outras coisas.
-        #
-        # A ocasiao fica de fora desse calculo principal (que e so sobre
-        # interesses) e entra como um bonus simples: a maioria dos itens do
-        # catalogo serve para varias ocasioes ao mesmo tempo, e isso nao deve
-        # ser tratado como "tag extra irrelevante" que penaliza o item.
         tamanho_pool = min(len(candidatos), top_n * MULTIPLICADOR_POOL)
         modelo = NearestNeighbors(metric="cosine", n_neighbors=tamanho_pool)
         modelo.fit(matriz_candidatos)
@@ -136,7 +177,7 @@ class GiftRecommender:
         ocasioes_lista = candidatos["ocasioes_lista"].to_numpy()
         usa_ocasiao = bool(ocasiao) and ocasiao != OCASIAO_SEM_PREFERENCIA
 
-        pool = []
+        pool: list[Resultado] = []
         for posicao in posicoes[0]:
             vetor_item = matriz_candidatos[posicao]
             sobreposicao = float(np.dot(vetor_item, perfil_tags))
@@ -152,11 +193,15 @@ class GiftRecommender:
         return pool
 
     @staticmethod
-    def _remover_variantes_duplicadas(pool_ordenado):
-        # itens com a mesma categoria e exatamente as mesmas tags sao a mesma
-        # ideia de presente (ex: variantes de preco do mesmo produto) e empatam
-        # em compatibilidade; manter so o mais proximo do orcamento entre eles
-        # evita que eles sozinhos tomem todas as vagas do pool de diversidade.
+    def _remover_variantes_duplicadas(pool_ordenado: list[Resultado]) -> list[Resultado]:
+        """Mantem só um item por (categoria, conjunto de tags).
+
+        Itens com a mesma categoria e exatamente as mesmas tags são a mesma
+        ideia de presente (ex: variantes de preço do mesmo produto) e
+        empatam em compatibilidade; manter só o primeiro (já mais próximo do
+        orçamento, pois `pool_ordenado` já vem ordenado) evita que eles
+        sozinhos tomem todas as vagas do pool de diversidade.
+        """
         vistos = set()
         unicos = []
         for item in pool_ordenado:
@@ -167,12 +212,18 @@ class GiftRecommender:
         return unicos
 
     @staticmethod
-    def _selecionar_com_diversidade(pool_ordenado, top_n):
+    def _selecionar_com_diversidade(pool_ordenado: list[Resultado], top_n: int) -> list[Resultado]:
+        """Seleciona até `top_n` itens limitando quantos vêm da mesma categoria.
+
+        Relaxa o limite por categoria progressivamente (1 a 1) só quando não
+        há itens suficientes de outras categorias para preencher `top_n` —
+        em vez de descartar o limite por completo.
+        """
         limite = MAX_ITENS_POR_CATEGORIA
 
         while True:
-            selecionados = []
-            contagem_por_categoria = {}
+            selecionados: list[Resultado] = []
+            contagem_por_categoria: dict[str, int] = {}
             for item in pool_ordenado:
                 if len(selecionados) >= top_n:
                     break
@@ -188,14 +239,18 @@ class GiftRecommender:
         selecionados.sort(key=lambda item: -item["compatibilidade"])
         return selecionados
 
-    def _recomendar_por_orcamento(self, candidatos, orcamento, top_n):
+    def _recomendar_por_orcamento(
+        self, candidatos: pd.DataFrame, orcamento: float, top_n: int
+    ) -> list[Resultado]:
+        """Fallback usado quando o perfil de interesses fica todo zerado: ordena por proximidade ao orçamento."""
         candidatos = candidatos.copy()
         candidatos["distancia_orcamento"] = (candidatos["preco"] - orcamento).abs()
         candidatos = candidatos.sort_values("distancia_orcamento").head(top_n)
         return [self._formatar_item(item, None) for _, item in candidatos.iterrows()]
 
     @staticmethod
-    def _formatar_item(item, compatibilidade):
+    def _formatar_item(item: pd.Series, compatibilidade: Optional[float]) -> Resultado:
+        """Monta o dict de resposta, convertendo tipos numpy para tipos nativos do Python."""
         return {
             "id": int(item["id"]),
             "nome": str(item["nome"]),
