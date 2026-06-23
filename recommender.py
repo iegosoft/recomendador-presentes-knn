@@ -32,8 +32,12 @@ TOLERANCIAS_ORCAMENTO = [0.0, 0.15, 0.30]
 # abaixo desse numero de itens, tenta a proxima tolerancia de orcamento
 MIN_ITENS_PARA_PARAR = 3
 
-# tamanho do pool avaliado pelo KNN antes do corte por diversidade, em multiplos de top_n
-MULTIPLICADOR_POOL = 6
+# tamanho do pool avaliado pelo KNN antes do corte por diversidade, em multiplos de top_n.
+# precisa ser generoso porque cada produto-base do catalogo tem 21 variantes
+# de preco/estilo com tags identicas (que empatam exatamente em compatibilidade);
+# um pool pequeno pode ficar tomado so pelas variantes de 1-2 produtos que
+# empataram no topo, sem nunca "ver" produtos diferentes mais abaixo.
+MULTIPLICADOR_POOL = 20
 
 # limite de itens da mesma categoria entre os resultados finais
 MAX_ITENS_POR_CATEGORIA = 2

@@ -83,32 +83,39 @@ SEEDS = [
 ]
 
 VARIACOES = [
-    ("Linha Básica", 0.50),
-    ("Linha Essencial", 0.65),
-    ("Versão Compacta", 0.80),
+    ("Linha Popular", 0.27),
+    ("Linha Econômica", 0.40),
+    ("Linha Essencial", 0.55),
+    ("Versão Compacta", 0.75),
     ("Edição Padrão", 1.00),
-    ("Linha Premium", 1.20),
-    ("Versão Pro", 1.40),
+    ("Linha Premium", 1.30),
     ("Edição Limitada", 1.65),
 ]
+
+# palavras de estilo invariaveis em genero (nao mudam com o substantivo:
+# "industrial"/"industrial", "vintage"/"vintage", "minimalista"/"minimalista"),
+# pra multiplicar a variedade de nomes sem gerar erro de concordancia
+# gramatical em portugues (o que aconteceria com adjetivos tipo "moderno").
+ESTILOS = ["Vintage", "Industrial", "Minimalista"]
 
 
 def gerar_linhas():
     linha_id = 1
     for nome, categoria, preco, idade_min, idade_max, genero, ocasiao, tags in SEEDS:
-        for rotulo, multiplicador in VARIACOES:
-            yield {
-                "id": linha_id,
-                "nome": f"{nome} – {rotulo}",
-                "categoria": categoria,
-                "preco": round(preco * multiplicador),
-                "idade_min": idade_min,
-                "idade_max": idade_max,
-                "genero": genero,
-                "ocasiao": ocasiao,
-                "tags": tags,
-            }
-            linha_id += 1
+        for estilo in ESTILOS:
+            for rotulo, multiplicador in VARIACOES:
+                yield {
+                    "id": linha_id,
+                    "nome": f"{nome} {estilo} – {rotulo}",
+                    "categoria": categoria,
+                    "preco": round(preco * multiplicador),
+                    "idade_min": idade_min,
+                    "idade_max": idade_max,
+                    "genero": genero,
+                    "ocasiao": ocasiao,
+                    "tags": tags,
+                }
+                linha_id += 1
 
 
 if __name__ == "__main__":
