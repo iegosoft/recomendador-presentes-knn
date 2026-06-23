@@ -1,7 +1,10 @@
+"""Aplicação Flask: serve o formulário e a API de recomendação de presentes."""
+
 import logging
 import os
+from typing import Any, Optional
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, Response, jsonify, render_template, request
 
 from recommender import OCASIAO_SEM_PREFERENCIA, OCASIOES_VOCABULARIO, TAGS_VOCABULARIO, GiftRecommender
 
@@ -16,7 +19,7 @@ OCASIOES_VALIDAS = set(OCASIOES_VOCABULARIO) | {OCASIAO_SEM_PREFERENCIA}
 
 
 @app.route("/")
-def index():
+def index() -> str:
     return render_template(
         "index.html",
         tags=TAGS_VOCABULARIO,
@@ -26,12 +29,13 @@ def index():
 
 
 @app.route("/health")
-def health():
+def health() -> Response:
+    """Healthcheck simples para orquestradores (Docker, Kubernetes, etc.)."""
     return jsonify({"status": "ok"})
 
 
 @app.route("/api/recomendar", methods=["POST"])
-def recomendar():
+def recomendar() -> tuple[Response, int] | Response:
     dados = request.get_json(silent=True) or {}
 
     erro = _validar_dados(dados)
@@ -54,7 +58,8 @@ def recomendar():
     return jsonify(resposta)
 
 
-def _validar_dados(dados):
+def _validar_dados(dados: dict[str, Any]) -> Optional[str]:
+    """Valida o corpo da requisição. Retorna a mensagem de erro, ou None se válido."""
     idade = dados.get("idade")
     orcamento = dados.get("orcamento")
     genero = dados.get("genero")
@@ -77,14 +82,14 @@ def _validar_dados(dados):
 
 
 @app.errorhandler(404)
-def nao_encontrado(_erro):
+def nao_encontrado(_erro: Exception) -> tuple[Response | str, int]:
     if request.path.startswith("/api/"):
         return jsonify({"erro": "rota não encontrada"}), 404
     return "Página não encontrada.", 404
 
 
 @app.errorhandler(500)
-def erro_interno(erro):
+def erro_interno(erro: Exception) -> tuple[Response | str, int]:
     logger.exception("erro interno nao tratado", exc_info=erro)
     if request.path.startswith("/api/"):
         return jsonify({"erro": "erro interno no servidor"}), 500

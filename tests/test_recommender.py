@@ -93,6 +93,22 @@ def test_selecionar_com_diversidade_relaxa_limite_se_necessario():
     assert [item["id"] for item in selecionados] == [1, 2, 3]
 
 
+def test_remove_variantes_duplicadas_mantem_so_a_primeira():
+    pool = [
+        {"id": 1, "categoria": "A", "preco": 50, "compatibilidade": 90.0, "tags": ["leitura", "arte"]},
+        {"id": 2, "categoria": "A", "preco": 60, "compatibilidade": 90.0, "tags": ["arte", "leitura"]},
+        {"id": 3, "categoria": "A", "preco": 70, "compatibilidade": 80.0, "tags": ["leitura"]},
+        {"id": 4, "categoria": "B", "preco": 70, "compatibilidade": 80.0, "tags": ["leitura"]},
+    ]
+
+    unicos = GiftRecommender._remover_variantes_duplicadas(pool)
+
+    # itens 1 e 2 tem a mesma categoria e as mesmas tags (em ordem
+    # diferente) - contam como a mesma ideia de presente. O item 4 tem as
+    # mesmas tags do item 3, mas categoria diferente, e por isso permanece.
+    assert [item["id"] for item in unicos] == [1, 3, 4]
+
+
 def test_diversidade_espalha_resultados_entre_categorias(recomendador):
     # teste de ponta a ponta, mais permissivo: confirma que a diversidade
     # melhora a distribuicao sem depender da ordem exata de empate entre
