@@ -121,3 +121,22 @@ function esconderMensagens() {
   avisoOrcamento.hidden = true;
   estadoVazio.hidden = true;
 }
+
+// ── Troca de abas ────────────────────────────────────────
+document.querySelectorAll(".aba-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const alvo = btn.dataset.aba;
+
+    document.querySelectorAll(".aba-btn").forEach((b) => {
+      b.classList.remove("aba-ativa");
+      b.setAttribute("aria-selected", "false");
+    });
+    document.querySelectorAll(".painel-aba").forEach((p) => {
+      p.hidden = true;
+    });
+
+    btn.classList.add("aba-ativa");
+    btn.setAttribute("aria-selected", "true");
+    document.getElementById(`painel-${alvo}`).hidden = false;
+  });
+});

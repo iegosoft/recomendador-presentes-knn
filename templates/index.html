@@ -18,70 +18,160 @@
     </div>
   </header>
 
-  <main>
-    <section class="painel formulario-secao" aria-labelledby="form-titulo">
-      <h2 id="form-titulo">Perfil de quem vai receber</h2>
-      <form id="form-recomendacao" novalidate>
-        <div class="linha-campos">
-          <div class="campo">
-            <label for="idade">Idade</label>
-            <input type="number" id="idade" name="idade" min="1" required>
+  <nav class="abas-nav" aria-label="Navegação principal">
+    <div class="abas-nav-inner">
+      <button class="aba-btn aba-ativa" data-aba="recomendador" aria-selected="true">
+        <span class="aba-icone">🎁</span> Recomendador
+      </button>
+      <button class="aba-btn" data-aba="sobre" aria-selected="false">
+        <span class="aba-icone">👥</span> Sobre o Projeto
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAINEL: Recomendador -->
+  <div id="painel-recomendador" class="painel-aba">
+    <main>
+      <section class="painel formulario-secao" aria-labelledby="form-titulo">
+        <h2 id="form-titulo">Perfil de quem vai receber</h2>
+        <form id="form-recomendacao" novalidate>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="idade">Idade</label>
+              <input type="number" id="idade" name="idade" min="1" required>
+            </div>
+
+            <div class="campo">
+              <label for="genero">Gênero</label>
+              <select id="genero" name="genero" required>
+                <option value="Feminino">Feminino</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Unissex">Unissex</option>
+              </select>
+            </div>
           </div>
 
-          <div class="campo">
-            <label for="genero">Gênero</label>
-            <select id="genero" name="genero" required>
-              <option value="Feminino">Feminino</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Unissex">Unissex</option>
-            </select>
-          </div>
-        </div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="orcamento">Orçamento (R$)</label>
+              <input type="number" id="orcamento" name="orcamento" min="1" step="0.01" required>
+            </div>
 
-        <div class="linha-campos">
-          <div class="campo">
-            <label for="orcamento">Orçamento (R$)</label>
-            <input type="number" id="orcamento" name="orcamento" min="1" step="0.01" required>
+            <div class="campo">
+              <label for="ocasiao">Ocasião</label>
+              <select id="ocasiao" name="ocasiao" required>
+                {% for ocasiao in ocasioes %}
+                <option value="{{ ocasiao }}">{{ ocasiao }}</option>
+                {% endfor %}
+                <option value="{{ ocasiao_sem_preferencia }}">{{ ocasiao_sem_preferencia }}</option>
+              </select>
+            </div>
           </div>
 
-          <div class="campo">
-            <label for="ocasiao">Ocasião</label>
-            <select id="ocasiao" name="ocasiao" required>
-              {% for ocasiao in ocasioes %}
-              <option value="{{ ocasiao }}">{{ ocasiao }}</option>
+          <fieldset class="campo campo-interesses">
+            <legend>Interesses (escolha pelo menos um)</legend>
+            <div class="chips">
+              {% for tag in tags %}
+              <label class="chip">
+                <input type="checkbox" name="interesses" value="{{ tag }}">
+                <span>{{ tag }}</span>
+              </label>
               {% endfor %}
-              <option value="{{ ocasiao_sem_preferencia }}">{{ ocasiao_sem_preferencia }}</option>
-            </select>
+            </div>
+          </fieldset>
+
+          <p class="mensagem-erro" id="mensagem-erro" role="alert" hidden></p>
+
+          <button type="submit" class="botao-principal">Recomendar presentes</button>
+        </form>
+      </section>
+
+      <section class="resultados-secao" aria-live="polite">
+        <h2 class="resultados-titulo" id="resultados-titulo" hidden>Sugestões para você</h2>
+        <p class="aviso-orcamento" id="aviso-orcamento" hidden></p>
+        <p class="estado-vazio" id="estado-vazio" hidden>
+          Nenhum presente encontrado com esses filtros. Tente ajustar o orçamento ou os interesses.
+        </p>
+        <div class="grid-resultados" id="grid-resultados"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- PAINEL: Sobre o Projeto -->
+  <div id="painel-sobre" class="painel-aba" hidden>
+    <main>
+      <section class="painel sobre-projeto-secao">
+        <div class="sobre-cabecalho">
+          <span class="sobre-badge">Trabalho Acadêmico</span>
+          <h2>Sistema de Recomendação de Presentes</h2>
+          <p class="sobre-subtitulo">
+            Baseado em Conteúdo com Similaridade de Cosseno e K-Vizinhos Mais Próximos (KNN)
+          </p>
+        </div>
+
+        <div class="sobre-disciplina">
+          <div class="disciplina-icone">🎓</div>
+          <div>
+            <p class="disciplina-rotulo">Disciplina</p>
+            <p class="disciplina-nome">Álgebra Linear</p>
+            <p class="disciplina-professor">Prof. Fernando Soares</p>
           </div>
         </div>
 
-        <fieldset class="campo campo-interesses">
-          <legend>Interesses (escolha pelo menos um)</legend>
-          <div class="chips">
-            {% for tag in tags %}
-            <label class="chip">
-              <input type="checkbox" name="interesses" value="{{ tag }}">
-              <span>{{ tag }}</span>
-            </label>
-            {% endfor %}
-          </div>
-        </fieldset>
+        <div class="sobre-divisor"></div>
 
-        <p class="mensagem-erro" id="mensagem-erro" role="alert" hidden></p>
+        <h3 class="sobre-secao-titulo">Equipe de Desenvolvimento</h3>
+        <ul class="equipe-lista">
+          <li class="equipe-card">
+            <span class="equipe-avatar">A</span>
+            <span class="equipe-nome">Ariane Nascimento Andrade</span>
+          </li>
+          <li class="equipe-card">
+            <span class="equipe-avatar">J</span>
+            <span class="equipe-nome">Josielle Santos da Silva</span>
+          </li>
+          <li class="equipe-card">
+            <span class="equipe-avatar">J</span>
+            <span class="equipe-nome">Juliane Vitória de Souza Silva</span>
+          </li>
+          <li class="equipe-card">
+            <span class="equipe-avatar">M</span>
+            <span class="equipe-nome">Mauricio Carvalho de Castro</span>
+          </li>
+          <li class="equipe-card">
+            <span class="equipe-avatar">I</span>
+            <span class="equipe-nome">Iêgo Sérgio Costa de Souza</span>
+          </li>
+        </ul>
 
-        <button type="submit" class="botao-principal">Recomendar presentes</button>
-      </form>
-    </section>
+        <div class="sobre-divisor"></div>
 
-    <section class="resultados-secao" aria-live="polite">
-      <h2 class="resultados-titulo" id="resultados-titulo" hidden>Sugestões para você</h2>
-      <p class="aviso-orcamento" id="aviso-orcamento" hidden></p>
-      <p class="estado-vazio" id="estado-vazio" hidden>
-        Nenhum presente encontrado com esses filtros. Tente ajustar o orçamento ou os interesses.
-      </p>
-      <div class="grid-resultados" id="grid-resultados"></div>
-    </section>
-  </main>
+        <h3 class="sobre-secao-titulo">Sobre o Sistema</h3>
+        <p class="sobre-descricao">
+          Este sistema aplica conceitos de <strong>álgebra linear</strong> para recomendar presentes personalizados.
+          Cada item do catálogo e o perfil do destinatário são representados como
+          <strong>vetores em um espaço de 19 dimensões</strong> (multi-hot encoding),
+          onde cada dimensão corresponde a um interesse (tecnologia, música, viagem, etc.).
+        </p>
+        <p class="sobre-descricao">
+          O algoritmo <strong>K-Vizinhos Mais Próximos (KNN)</strong> usa a
+          <strong>similaridade de cosseno</strong> — métrica baseada no ângulo entre vetores,
+          um conceito central de álgebra linear — para encontrar os itens mais compatíveis com o perfil informado.
+          A compatibilidade exibida é calculada pelo <strong>Coeficiente de Sobreposição</strong>,
+          que mede a interseção entre os conjuntos de tags do perfil e do item.
+        </p>
+
+        <div class="sobre-tecnologias">
+          <span class="tech-pill">Python 3.14</span>
+          <span class="tech-pill">Flask</span>
+          <span class="tech-pill">scikit-learn (KNN)</span>
+          <span class="tech-pill">NumPy</span>
+          <span class="tech-pill">pandas</span>
+          <span class="tech-pill">GitHub Actions</span>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
